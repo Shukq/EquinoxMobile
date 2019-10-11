@@ -1,0 +1,2 @@
+include ':app', ':awsplatform', ':domain'
+rootProject.name='Mobile'
