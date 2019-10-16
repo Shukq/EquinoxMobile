@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Mobile</string>
+    <string name="logInTitle">Equinox</string>
+    <string name="logInDetail">Oficina de Equidad y Genero</string>
 </resources>
