@@ -4,6 +4,9 @@ apply plugin: 'kotlin-android'
 
 apply plugin: 'kotlin-android-extensions'
 
+apply plugin: 'kotlin-kapt'
+
+
 android {
     compileSdkVersion 28
     defaultConfig {
@@ -22,6 +25,10 @@ android {
     }
 }
 
+final auto_parcel_version = "0.3.1"
+final dagger_version = "2.11"
+
+
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
@@ -39,4 +46,24 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.1'
     implementation 'com.google.android.material:material:1.0.0'
     implementation 'com.android.support.constraint:constraint-layout:1.1.3'
+
+    implementation project(path: ':awsplatform')
+    implementation project(path: ':domain')
+
+    //RX
+    implementation "io.reactivex.rxjava2:rxkotlin:2.2.0"
+
+    //RX Binding
+    implementation 'com.jakewharton.rxbinding2:rxbinding-kotlin:2.0.0'
+
+    //
+    implementation "com.github.frankiesardo:auto-parcel:$auto_parcel_version"
+    kapt "com.github.frankiesardo:auto-parcel-processor:$auto_parcel_version"
+
+    //Dagger
+    implementation "com.google.dagger:dagger:$dagger_version"
+    kapt "com.google.dagger:dagger-compiler:$dagger_version"
+
+    //Aux cognitoAuthHandlerClass
+    implementation 'com.amazonaws:aws-android-sdk-cognitoauth:2.10.0'
 }

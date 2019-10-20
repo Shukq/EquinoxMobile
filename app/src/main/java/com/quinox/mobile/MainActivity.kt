@@ -2,6 +2,7 @@ package com.quinox.mobile
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import io.reactivex.Observable
 
 class MainActivity : AppCompatActivity() {
 
