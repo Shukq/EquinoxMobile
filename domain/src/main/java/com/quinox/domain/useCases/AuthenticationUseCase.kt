@@ -4,6 +4,7 @@ import com.quinox.domain.entities.Gender
 import com.quinox.domain.entities.SignInResult
 import com.quinox.domain.entities.SignUpResult
 import com.quinox.domain.entities.UserStateResult
+import com.quinox.domain.entities.Result
 import io.reactivex.Observable
 
 interface AuthenticationUseCase {
