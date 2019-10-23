@@ -1,4 +1,4 @@
-package com.quinox.mobile.ui.send
+package com.quinox.mobile.ui.lessons
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -10,20 +10,20 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.quinox.mobile.R
 
-class SendFragment : Fragment() {
+class LessonsFragment : Fragment() {
 
-    private lateinit var sendViewModel: SendViewModel
+    private lateinit var lessonsViewModel: LessonsViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        sendViewModel =
-            ViewModelProviders.of(this).get(SendViewModel::class.java)
-        val root = inflater.inflate(R.layout.fragment_send, container, false)
-        val textView: TextView = root.findViewById(R.id.text_send)
-        sendViewModel.text.observe(this, Observer {
+        lessonsViewModel =
+            ViewModelProviders.of(this).get(LessonsViewModel::class.java)
+        val root = inflater.inflate(R.layout.fragment_lessons, container, false)
+        val textView: TextView = root.findViewById(R.id.text_tools)
+        lessonsViewModel.text.observe(this, Observer {
             textView.text = it
         })
         return root

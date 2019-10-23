@@ -1,4 +1,4 @@
-package com.quinox.mobile.ui.tools
+package com.quinox.mobile.ui.exit
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -10,20 +10,20 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.quinox.mobile.R
 
-class ToolsFragment : Fragment() {
+class ExitFragment : Fragment() {
 
-    private lateinit var toolsViewModel: ToolsViewModel
+    private lateinit var exitViewModel: ExitViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        toolsViewModel =
-            ViewModelProviders.of(this).get(ToolsViewModel::class.java)
-        val root = inflater.inflate(R.layout.fragment_tools, container, false)
-        val textView: TextView = root.findViewById(R.id.text_tools)
-        toolsViewModel.text.observe(this, Observer {
+        exitViewModel =
+            ViewModelProviders.of(this).get(ExitViewModel::class.java)
+        val root = inflater.inflate(R.layout.fragment_exit, container, false)
+        val textView: TextView = root.findViewById(R.id.text_share)
+        exitViewModel.text.observe(this, Observer {
             textView.text = it
         })
         return root

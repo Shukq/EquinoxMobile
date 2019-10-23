@@ -1,13 +1,13 @@
-package com.quinox.mobile.ui.tools
+package com.quinox.mobile.ui.profile
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 
-class ToolsViewModel : ViewModel() {
+class ProfileViewModel : ViewModel() {
 
     private val _text = MutableLiveData<String>().apply {
-        value = "This is tools Fragment"
+        value = "This is slideshow Fragment"
     }
     val text: LiveData<String> = _text
 }

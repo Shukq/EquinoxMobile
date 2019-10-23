@@ -1,13 +1,13 @@
-package com.quinox.mobile.ui.share
+package com.quinox.mobile.ui.lessons
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 
-class ShareViewModel : ViewModel() {
+class LessonsViewModel : ViewModel() {
 
     private val _text = MutableLiveData<String>().apply {
-        value = "This is share Fragment"
+        value = "This is tools Fragment"
     }
     val text: LiveData<String> = _text
 }

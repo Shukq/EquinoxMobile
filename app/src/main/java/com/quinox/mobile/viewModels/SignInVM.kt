@@ -11,9 +11,8 @@ import io.reactivex.subjects.PublishSubject
 import com.quinox.domain.entities.Result
 import com.quinox.mobile.extensions.takeWhen
 import com.quinox.mobile.utils.ValidationService
-import org.xml.sax.ErrorHandler
 
-interface SignInViewModel {
+interface SignInVM {
     interface Inputs {
         fun username(username: String)
         fun password(password: String)
@@ -28,7 +27,7 @@ interface SignInViewModel {
         fun showConfirmationAlert() : Observable<Unit>
     }
 
-    class ViewModel(@NonNull val environment: Environment) : ActivityViewModel<SignInViewModel>(environment), Inputs, Outputs{
+    class ViewModel(@NonNull val environment: Environment) : ActivityViewModel<SignInVM>(environment), Inputs, Outputs{
 
 
         //Inputs
@@ -41,8 +40,8 @@ interface SignInViewModel {
         private val signInButtonIsEnabled = BehaviorSubject.create<Boolean>()
         private val loadingEnabled = BehaviorSubject.create<Boolean>()
         private val showError = BehaviorSubject.create<String>()
-        private val showConfirmationAlert = PublishSubject.create<Unit>()
-        private val signedInAction = PublishSubject.create<Unit>()
+        private val showConfirmationAlert = BehaviorSubject.create<Unit>()
+        private val signedInAction = BehaviorSubject.create<Unit>()
 
 
         val inputs : Inputs = this
@@ -85,13 +84,6 @@ interface SignInViewModel {
 
             signInEvent
                 .filter { !it.isFail() }
-                /*
-             .map { it ->
-                 when(it){
-                     is Result.success -> return@map it.value as SignInResult
-                     is Result.failure -> return@map null
-                 }
-             }*/
                 .map { return@map it.successValue() }
                 .map { Unit }
                 .subscribe(this.signedInAction)
