@@ -33,11 +33,11 @@ object ValidationService {
         return profession.isNotEmpty()
     }
 
-    private fun isValidDate(date: String): Boolean{
-        return date.isNotEmpty()
+    private fun isValidDate(date: String?): Boolean{
+        return date.isNullOrEmpty()
     }
 
-    fun validateUserRegister(username: String, email: String, profession: String, date: String): Boolean{
+    fun validateUserRegister(username: String, email: String, profession: String, date: String?): Boolean{
         return isValidName(username) && isValidEmail(email) && isValidOcupation(profession) && isValidDate(date)
     }
 

@@ -95,7 +95,7 @@
         app:srcCompat="@drawable/ic_arrow_forward_black_40dp" />
 
     <ImageButton
-        android:id="@+id/imageButton2"
+        android:id="@+id/datePicker"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/marginStart"
@@ -107,14 +107,14 @@
         app:srcCompat="@drawable/ic_date_range_black_40dp" />
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/lbl_date"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
         android:layout_marginTop="52dp"
         android:text="DATE"
 
-        app:layout_constraintStart_toEndOf="@+id/imageButton2"
+        app:layout_constraintStart_toEndOf="@+id/datePicker"
         app:layout_constraintTop_toBottomOf="@+id/lay_workRegister" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

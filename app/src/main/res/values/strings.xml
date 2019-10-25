@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">Equinox</string>
-    <string name="logInTitle">Equinox</string>
+    <string name="SignTitle">Equinox</string>
     <string name="logInDetail">Oficina de Equidad y Genero</string>
     <string name="RegisterTitle">Registrate!</string>
     <string name="title_activity_home">HomeActivity</string>
@@ -11,8 +11,18 @@
     <string name="nav_header_desc">Navigation header</string>
     <string name="action_settings">Settings</string>
 
+    <string name="male">male</string>
+    <string name="female">female</string>
+
+    <string-array name="spin_Gender">
+        <item>@string/male</item>
+        <item>@string/female</item>
+    </string-array>
+
     <string name="menu_home">Inicio</string>
     <string name="menu_profile">Mi perfil</string>
     <string name="menu_lessons">Cursos</string>
     <string name="menu_exit">Salir</string>
+    <string name="registerTitle">Registro</string>
+    <string name="logInTitle">Iniciar sesion</string>
 </resources>

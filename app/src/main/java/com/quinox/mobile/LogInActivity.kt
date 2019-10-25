@@ -20,6 +20,9 @@ class LogInActivity : BaseActivity<SignInVM.ViewModel>() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_log_in)
+        supportActionBar?.title = getString(R.string.logInTitle)
+        supportActionBar!!.setDisplayHomeAsUpEnabled(true)
+        supportActionBar!!.setDisplayShowHomeEnabled(true)
 
         progressBar_LogIn.visibility = View.GONE
 
@@ -57,12 +60,19 @@ class LogInActivity : BaseActivity<SignInVM.ViewModel>() {
         })
     }
 
-    override fun onBackPressed() {
-        super.onBackPressed()
-    }
 
     override fun onDestroy() {
         disposable.dispose()
         super.onDestroy()
+    }
+
+    override fun onBackPressed() {
+        super.onBackPressed()
+        finish()
+    }
+
+    override fun onSupportNavigateUp(): Boolean {
+        onBackPressed()
+        return true
     }
 }
