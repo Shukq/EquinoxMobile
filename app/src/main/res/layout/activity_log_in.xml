@@ -44,12 +44,13 @@
             android:hint="Password" />
     </com.google.android.material.textfield.TextInputLayout>
 
-    <Button
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/btn_logLogIn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:enabled="false"
         android:text="Iniciar sesion"
+        style="@style/Widget.AppCompat.Button.Colored"
         android:layout_marginStart="@dimen/marginStart"
         android:layout_marginTop="@dimen/marginTop"
         android:layout_marginEnd="@dimen/marginEnd"

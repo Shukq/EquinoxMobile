@@ -1,5 +1,6 @@
 package com.quinox.mobile.utils
 
+import android.util.Log
 import android.util.Patterns
 import java.util.regex.Pattern
 
@@ -34,7 +35,7 @@ object ValidationService {
     }
 
     private fun isValidDate(date: String?): Boolean{
-        return date.isNullOrEmpty()
+        return !date.isNullOrEmpty()
     }
 
     fun validateUserRegister(username: String, email: String, profession: String, date: String?): Boolean{

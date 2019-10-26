@@ -1,5 +1,6 @@
 package com.quinox.mobile.viewModels
 
+import android.util.Log
 import androidx.annotation.NonNull
 import com.quinox.domain.entities.Gender
 import com.quinox.domain.entities.SignUpModel
