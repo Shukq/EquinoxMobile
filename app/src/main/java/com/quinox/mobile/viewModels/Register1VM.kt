@@ -56,23 +56,37 @@ interface Register1VM {
         init {
             dateButtonPressed
                 .subscribe(openDatePicker)
+
             dateActionReceive
                 .subscribe(dateTextChanged)
-            val form = Observables.combineLatest(usernameEditTextChanged, emailEditTextChanged, occupationEditTextChanged)
+
+            val nameAndEmail = Observables.combineLatest(usernameEditTextChanged, emailEditTextChanged)
+
+            val occupationDateAndGender = Observables.combineLatest(occupationEditTextChanged,dateActionReceive,genderSpinnerChanged)
+
+            val form = Observables.combineLatest(nameAndEmail,occupationDateAndGender)
 
             form
                 .map {
-                    val date = dateTextChanged.value
-                    return@map ValidationService.validateUserRegister(it.first, it.second, it.third, date)
+                    val name = it.first.first
+                    val email = it.first.second
+                    val occupation = it.second.first
+                    val date = it.second.second
+                    //val gender = it.second.third
+                    return@map ValidationService.validateUserRegister(name,email,occupation,date)
                 }
                 .subscribe(nextButtonIsEnabled)
-            val data = Observables.combineLatest(form, genderSpinnerChanged)
 
-            data
+            form
                 .takeWhen(nextButtonPressed)
+                .map { it.second }
                 .map {
-                    val date = dateTextChanged.value
-                    return@map SignUpModel(it.second.first.first, it.second.first.second, it.second.first.third, date, it.second.second)
+                    val name = it.first.first
+                    val email = it.first.second
+                    val occupation = it.second.first
+                    val date = it.second.second
+                    val gender = it.second.third
+                    return@map SignUpModel(name,email,occupation,date,gender)
                 }
                 .subscribe(register1Action)
 
