@@ -11,6 +11,58 @@ import io.reactivex.Single
 import java.lang.Exception
 
 class AuthenticationUseCase : AuthenticationUseCase {
+    override fun resendConfirmationCode(username: String): Observable<Result<Boolean>> {
+        val single = Single.create<Result<Boolean>> create@{ single ->
+            AWSMobileClient.getInstance().resendSignUp(username,object : Callback<com.amazonaws.mobile.client.results.SignUpResult>{
+                override fun onResult(result: com.amazonaws.mobile.client.results.SignUpResult?) {
+                    if (result!=null){
+                        if(!result.confirmationState){
+                            single.onSuccess(Result.success(false))
+
+                        }else{
+                            single.onSuccess(Result.success(true))
+                        }
+                    }else{
+                        single.onSuccess(Result.failure(Exception()))
+                    }
+                }
+
+                override fun onError(e: Exception?) {
+                    Log.e("\uD83D\uDD34", "Platform, AuthenticationUseCase,resendConfirmationCode Error:", e)
+                    single.onSuccess(Result.failure(e))
+                }
+            } )
+        }
+        return single.toObservable()
+    }
+
+    override fun confirmSignUp(
+        username: String,
+        confirmationCode: String
+    ): Observable<Result<Boolean>> {
+        val single = Single.create<Result<Boolean>> create@{ single ->
+            AWSMobileClient.getInstance().confirmSignUp(username,confirmationCode, object : Callback<com.amazonaws.mobile.client.results.SignUpResult>{
+                override fun onResult(result: com.amazonaws.mobile.client.results.SignUpResult?) {
+                    if (result!=null){
+                        if(!result.confirmationState){
+                            single.onSuccess(Result.success(false))
+
+                        }else{
+                            single.onSuccess(Result.success(true))
+                        }
+                    }
+                }
+
+                override fun onError(e: Exception?) {
+                    Log.e("\uD83D\uDD34", "Platform, AuthenticationUseCase,confirmSignUp Error:", e)
+                    single.onSuccess(Result.failure(e))
+                }
+
+            })
+        }
+        return single.toObservable()
+    }
+
     override fun getCurrentUserState(): Observable<UserStateResult> {
         val single = Single.create<UserStateResult> create@{ single ->
             AWSMobileClient.getInstance().currentUserState().userState

@@ -12,4 +12,6 @@ interface AuthenticationUseCase {
     fun signIn(username: String,password: String) : Observable<Result<SignInResult>>
     fun signOut() : Observable<Result<UserStateResult>>
     fun signUp(username: String, password: String, name: String, gender: Gender) : Observable<Result<SignUpResult>>
+    fun confirmSignUp(username: String,confirmationCode : String) : Observable<Result<Boolean>>
+    fun resendConfirmationCode(username: String) : Observable<Result<Boolean>>
 }
