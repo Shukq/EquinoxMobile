@@ -10,7 +10,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".GetSessionActivity"
+        <activity android:name=".ConfirmAccActivity">
+        </activity>
+        <activity
+            android:name=".GetSessionActivity"
             android:theme="@style/noAnimTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -25,7 +28,7 @@
         <activity android:name=".Register2Activity" />
         <activity android:name=".Register1Activity" />
         <activity android:name=".LogInActivity" />
-        <activity android:name=".MainActivity"></activity>
+        <activity android:name=".MainActivity" />
     </application>
 
 </manifest>

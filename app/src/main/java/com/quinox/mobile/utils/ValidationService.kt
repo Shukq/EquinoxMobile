@@ -43,8 +43,8 @@ object ValidationService {
     }
 
     fun validatePasswordLenght(password : String) : Boolean{
-        val minPasswordLength = 8
-        val maxPasswordLength = 20
+        val minPasswordLenght = 8
+        val maxPasswordLenght = 20
         if(password.length < minPasswordLenght || password.length > maxPasswordLenght){
             return false
         }
@@ -52,8 +52,8 @@ object ValidationService {
     }
 
     fun validatePasswordCapitalLowerLetters(password: String) : Boolean {
-        val pattern1 = Pattern.compile(".[A-Z].")
-        val pattern1Sub = Pattern.compile(".[a-z].")
+        val pattern1 = Pattern.compile(".*[A-Z].*")
+        val pattern1Sub = Pattern.compile(".*[a-z].*")
         if (pattern1.matcher(password).matches() && pattern1Sub.matcher(password).matches()){
             return true
         }
@@ -61,7 +61,7 @@ object ValidationService {
     }
 
     fun validatePasswordNumbers(password: String): Boolean{
-        val pattern2 = Pattern.compile(".\\d.")
+        val pattern2 = Pattern.compile(".*\\d.*")
         if(pattern2.matcher(password).matches()){
             return true
         }
@@ -69,7 +69,7 @@ object ValidationService {
     }
 
     fun validatePasswordSpecialCharacters(password: String) : Boolean {
-        val pattern3 = Pattern.compile(".[!$#@_.+-].")
+        val pattern3 = Pattern.compile(".*[!$#@_.+-].*")
         if(pattern3.matcher(password).matches()){
             return true
         }

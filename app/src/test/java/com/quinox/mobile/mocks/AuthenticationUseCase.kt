@@ -43,6 +43,16 @@ class AuthenticationUseCase : AuthenticationUseCase {
         name: String,
         gender: Gender
     ): Observable<Result<SignUpResult>> {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        return Observable.create<Result<SignUpResult>> create@{ observer ->
+            if (username == "loktar@gmail.com" && password == "Memes1234_"){
+                val model = SignUpResult(SignUpState.confirmed,username,password)
+                observer.onNext(Result.success(model))
+                observer.onComplete()
+            }
+            else{
+                observer.onNext(Result.failure(Exception()))
+                observer.onComplete()
+            }
+        }
     }
 }

@@ -21,12 +21,18 @@
 
     <string name="name_register">Nombre</string>
     <string name="email_register">Email</string>
-    <string name="occupation_register">Ocupacion</string>
+    <string name="occupation_register">Ocupación</string>
     <string name="password_register">Contraseña</string>
+    <string name="code_confirm">Código de verificación</string>
+    <string name="text_confirm">Ingrese el código de verificación que ha sido enviado a tu correo electrónico</string>
+    <string name="resend_confirm">Reenviar código</string>
+    <string name="Close">Cerrar</string>
+    <string name="Sorry">Lo sentimos</string>
     <string name="menu_home">Inicio</string>
     <string name="menu_profile">Mi perfil</string>
     <string name="menu_lessons">Cursos</string>
     <string name="menu_exit">Salir</string>
     <string name="registerTitle">Registro</string>
-    <string name="logInTitle">Iniciar sesion</string>
+    <string name="logInTitle">Iniciar sesión</string>
+    <string name="confirmTitle">Confirmar cuenta</string>
 </resources>
