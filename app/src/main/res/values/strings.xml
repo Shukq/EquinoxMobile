@@ -19,6 +19,10 @@
         <item>@string/female</item>
     </string-array>
 
+    <string name="name_register">Nombre</string>
+    <string name="email_register">Email</string>
+    <string name="occupation_register">Ocupacion</string>
+    <string name="password_register">Contraseña</string>
     <string name="menu_home">Inicio</string>
     <string name="menu_profile">Mi perfil</string>
     <string name="menu_lessons">Cursos</string>

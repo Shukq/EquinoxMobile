@@ -41,6 +41,7 @@
             android:id="@+id/input_passLogIn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:inputType="textPassword"
             android:hint="Password" />
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -66,8 +67,7 @@
         android:layout_marginTop="@dimen/marginTop"
         android:layout_marginEnd="@dimen/marginEnd"
         android:clickable="true"
-        android:enabled="false"
-        android:text="Olvidaste tu password?"
+        android:text="Olvidaste tu contraseña?"
         android:textAlignment="center"
         android:textColor="@color/design_default_color_primary_dark"
         app:layout_constraintEnd_toEndOf="parent"
