@@ -6,14 +6,32 @@ import io.reactivex.Observable
 
 class AuthenticationUseCase : AuthenticationUseCase {
     override fun resendConfirmationCode(username: String): Observable<Result<Boolean>> {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        return Observable.create<Result<Boolean>> create@{ observer ->
+            if (username == "loktar@gmail.com"){
+                observer.onNext(Result.success(true))
+                observer.onComplete()
+            }
+            else{
+                observer.onNext(Result.failure(Exception()))
+                observer.onComplete()
+            }
+        }
     }
 
     override fun confirmSignUp(
         username: String,
         confirmationCode: String
     ): Observable<Result<Boolean>> {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        return Observable.create<Result<Boolean>> create@{ observer ->
+            if (username == "loktar@gmail.com" && confirmationCode == "123456"){
+                observer.onNext(Result.success(true))
+                observer.onComplete()
+            }
+            else{
+                observer.onNext(Result.failure(Exception()))
+                observer.onComplete()
+            }
+        }
     }
 
     override fun getCurrentUserState(): Observable<UserStateResult> {
@@ -25,7 +43,17 @@ class AuthenticationUseCase : AuthenticationUseCase {
     }
 
     override fun signIn(username: String, password: String): Observable<Result<SignInResult>> {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        return Observable.create<Result<SignInResult>> create@{ observer ->
+            if (username == "loktar@gmail.com" && password == "Memes1234_"){
+                val model = SignInResult("Ok")
+                observer.onNext(Result.success(model))
+                observer.onComplete()
+            }
+            else{
+                observer.onNext(Result.failure(Exception()))
+                observer.onComplete()
+            }
+        }
     }
 
     override fun signOut(): Observable<Result<UserStateResult>> {

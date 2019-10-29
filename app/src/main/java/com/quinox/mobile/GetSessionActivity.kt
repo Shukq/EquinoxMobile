@@ -1,13 +1,14 @@
 package com.quinox.mobile
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import com.quinox.mobile.anotations.RequiresActivityViewModel
 import com.quinox.mobile.base.BaseActivity
 import com.quinox.mobile.viewModels.GetSessionVM
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
+import kotlinx.android.synthetic.main.activity_get_session.*
 
 @RequiresActivityViewModel(GetSessionVM.ViewModel::class)
 class GetSessionActivity : BaseActivity<GetSessionVM.ViewModel>() {
@@ -28,6 +29,9 @@ class GetSessionActivity : BaseActivity<GetSessionVM.ViewModel>() {
             startActivity(intent)
             finishAffinity()
         })
+
+
+
         viewModel.inputs.onCreate()
 
     }

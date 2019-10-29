@@ -38,6 +38,11 @@ object ValidationService {
         return !date.isNullOrEmpty()
     }
 
+    fun validateVerificationCode(verificationCode: String) : Boolean{
+        val pattern = Pattern.compile("[0-9]{6}")
+        return pattern.matcher(verificationCode).matches()
+    }
+
     fun validateUserRegister(username: String, email: String, profession: String, date: String?): Boolean{
         return isValidName(username) && isValidEmail(email) && isValidOcupation(profession) && isValidDate(date)
     }

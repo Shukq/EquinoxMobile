@@ -102,9 +102,8 @@ interface Register2VM {
 
         override fun signUpButtonPressed() = this.signUpButtonPressed.onNext(Unit)
 
-        override fun password(password: String){
-            return this.passwordEditTextChanged.onNext(password)
-        }
+        override fun password(password: String) = this.passwordEditTextChanged.onNext(password)
+
 
         override fun signUpButtonEnabled(): Observable<Boolean> = this.signUpButtonEnabled
 

@@ -24,6 +24,7 @@ interface GetSessionVM {
 
         //inputs
         private val onCreate = PublishSubject.create<Unit>()
+
         //outputs
         private val signedInAction = BehaviorSubject.create<Unit>()
         private val signedOutAction = BehaviorSubject.create<Unit>()
@@ -50,6 +51,7 @@ interface GetSessionVM {
         override fun signedInAction(): Observable<Unit> = this.signedInAction
 
         override fun signedOutAction(): Observable<Unit> = this.signedOutAction
+
 
     }
 }

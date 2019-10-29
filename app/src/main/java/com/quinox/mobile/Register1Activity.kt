@@ -88,6 +88,7 @@ class Register1Activity : BaseActivity<Register1VM.ViewModel>() {
             val intent = Intent(this,Register2Activity::class.java)
             intent.putExtra("model",it)
             startActivity(intent)
+            finish()
         })
     }
 

@@ -69,8 +69,9 @@ class Register2Activity : BaseActivity<Register2VM.ViewModel>() {
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe {
                 val intent = Intent(this,ConfirmAccActivity::class.java)
-                intent.putExtra("SignUpModel",it)
+                intent.putExtra("SignUpResult",it)
                 startActivity(intent)
+                finish()
             })
     }
 
