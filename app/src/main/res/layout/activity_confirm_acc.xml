@@ -19,6 +19,7 @@
         app:layout_constraintTop_toBottomOf="@+id/txt_textConfirm">
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/input_codeConfirm"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/code_confirm" />
@@ -26,7 +27,7 @@
 
 
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/btn_resendConfirm"
+        android:id="@+id/btn_sendConfirm"
         style="@style/Widget.AppCompat.Button.Colored"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -63,7 +64,7 @@
         android:textColor="@android:color/black"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btn_resendConfirm" />
+        app:layout_constraintTop_toBottomOf="@+id/btn_sendConfirm" />
 
     <ProgressBar
         android:id="@+id/progressBar_codeConfirm"

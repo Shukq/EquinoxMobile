@@ -115,6 +115,7 @@ interface ConfirmAccVM {
                     .share()
                 verifyEvent
                     .filter { it.isFail() }
+                    .map { Unit }
                     .subscribe{
                         observer.onNext(Result.failure(Exception()))
                         observer.onComplete()

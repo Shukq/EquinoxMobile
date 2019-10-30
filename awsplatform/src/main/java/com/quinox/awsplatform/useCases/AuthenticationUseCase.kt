@@ -17,10 +17,10 @@ class AuthenticationUseCase : AuthenticationUseCase {
                 override fun onResult(result: com.amazonaws.mobile.client.results.SignUpResult?) {
                     if (result!=null){
                         if(!result.confirmationState){
-                            single.onSuccess(Result.success(false))
+                            single.onSuccess(Result.success(true))
 
                         }else{
-                            single.onSuccess(Result.success(true))
+                            single.onSuccess(Result.success(false))
                         }
                     }else{
                         single.onSuccess(Result.failure(Exception()))

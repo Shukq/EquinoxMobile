@@ -28,6 +28,7 @@
     <string name="resend_confirm">Reenviar código</string>
     <string name="Close">Cerrar</string>
     <string name="Sorry">Lo sentimos</string>
+    <string name="ErrorConfirm">Codigo de verificacion invalido</string>
     <string name="menu_home">Inicio</string>
     <string name="menu_profile">Mi perfil</string>
     <string name="menu_lessons">Cursos</string>
