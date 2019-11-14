@@ -38,6 +38,7 @@ dependencies {
 
     implementation "io.reactivex.rxjava2:rxkotlin:2.2.0"
     implementation 'com.jakewharton.rxbinding2:rxbinding-kotlin:2.0.0'
+    implementation 'com.contentful.java:java-sdk:9.0.1'
 
     //AWS
     //AWS
