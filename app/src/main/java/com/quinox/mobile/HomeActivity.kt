@@ -44,6 +44,15 @@ class HomeActivity : BaseActivity<HomeVM.ViewModel>() {
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
 
+        navView.setNavigationItemSelectedListener {
+            when(it.itemId){
+                R.id.nav_exit -> {
+                    signOutDialog()
+                }
+            }
+            return@setNavigationItemSelectedListener true
+        }
+
         composite.add(viewModel.outputs.signOutAction().observeOn(AndroidSchedulers.mainThread()).subscribe {
             val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
@@ -69,6 +78,10 @@ class HomeActivity : BaseActivity<HomeVM.ViewModel>() {
 
     override fun onBackPressed() {
         //super.onBackPressed()
+       signOutDialog()
+    }
+
+    private fun signOutDialog(){
         val builder = AlertDialog.Builder(this)
         builder.setTitle("Cerrar Sesión")
         builder.setMessage("¿Deseas realmente cerrar la sesión?")
