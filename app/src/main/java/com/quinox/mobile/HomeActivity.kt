@@ -44,14 +44,14 @@ class HomeActivity : BaseActivity<HomeVM.ViewModel>() {
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
 
-        navView.setNavigationItemSelectedListener {
+        /*navView.setNavigationItemSelectedListener {
             when(it.itemId){
                 R.id.nav_exit -> {
                     signOutDialog()
                 }
             }
             return@setNavigationItemSelectedListener true
-        }
+        }*/
 
         composite.add(viewModel.outputs.signOutAction().observeOn(AndroidSchedulers.mainThread()).subscribe {
             val intent = Intent(this, MainActivity::class.java)

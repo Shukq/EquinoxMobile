@@ -6,6 +6,7 @@ import android.content.SharedPreferences
 import androidx.annotation.NonNull
 import com.quinox.awsplatform.useCases.UseCaseProvider
 import com.quinox.domain.useCases.AuthenticationUseCase
+import com.quinox.domain.useCases.ContentfulUseCase
 import com.quinox.mobile.libs.Environment
 import dagger.Module
 import dagger.Provides
@@ -13,17 +14,18 @@ import javax.inject.Singleton
 
 @Module
 class ApplicationModule(@NonNull val application: Application) {
-    private val awsProvider = UseCaseProvider(application.applicationContext)
-
+    private val provider = UseCaseProvider(application.applicationContext)
     @Provides
     @Singleton
     fun provideEnvironment(
         @NonNull authenticationUseCase: AuthenticationUseCase,
-        @NonNull sharedPreferences: SharedPreferences
+        @NonNull sharedPreferences: SharedPreferences,
+        @NonNull contentfulUseCase: ContentfulUseCase
     ): Environment {
         return Environment.builder()
             .authenticationUseCase(authenticationUseCase)
             .sharedPreferences(sharedPreferences)
+            .contentfulUseCase(contentfulUseCase)
             .build()
     }
 
@@ -36,6 +38,12 @@ class ApplicationModule(@NonNull val application: Application) {
     @Provides
     @Singleton
     fun provideAuthenticationUseCase() : AuthenticationUseCase{
-        return awsProvider.makeAuthenticationUseCase()
+        return provider.makeAuthenticationUseCase()
+    }
+
+    @Provides
+    @Singleton
+    fun provideContentfulUseCase() : ContentfulUseCase{
+        return provider.makeContentfulUseCase()
     }
 }

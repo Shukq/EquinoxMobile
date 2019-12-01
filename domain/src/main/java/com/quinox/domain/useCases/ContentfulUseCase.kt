@@ -5,5 +5,5 @@ import com.quinox.domain.entities.Result
 import io.reactivex.Observable
 
 interface ContentfulUseCase {
-    fun getUnits(): Observable<Result<List<ContentfulUnit>>>
+    fun getHomePage() : Observable<Result<String>>
 }
