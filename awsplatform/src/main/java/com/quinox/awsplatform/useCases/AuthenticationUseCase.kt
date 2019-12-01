@@ -114,10 +114,15 @@ class AuthenticationUseCase : AuthenticationUseCase {
         username: String,
         password: String,
         name: String,
-        gender: Gender
+        gender: Gender,birthDate: String, occupation: String
     ): Observable<Result<SignUpResult>> {
         val single = Single.create<Result<SignUpResult>> create@{ single ->
-            AWSMobileClient.getInstance().signUp(username,password, mapOf(Pair("email",username),Pair("name",name)), null, object: Callback<com.amazonaws.mobile.client.results.SignUpResult>{
+            val userGender : String = when(gender){
+                Gender.female -> "female"
+                Gender.male -> "male"
+            }
+            AWSMobileClient.getInstance().signUp(username,password, mapOf(Pair("email",username),Pair("name",name),Pair("gender",userGender),Pair("birthdate",birthDate),Pair("custom:occupation", occupation)),
+                null, object: Callback<com.amazonaws.mobile.client.results.SignUpResult>{
                 override fun onResult(result: com.amazonaws.mobile.client.results.SignUpResult?) {
                     val state : SignUpState
                     if (result!=null){

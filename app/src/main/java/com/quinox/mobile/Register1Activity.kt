@@ -4,6 +4,7 @@ import android.app.DatePickerDialog
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.Adapter
 import android.widget.AdapterView
@@ -104,7 +105,8 @@ class Register1Activity : BaseActivity<Register1VM.ViewModel>() {
     fun showDatePickerDialog(){
         val listener: DatePickerDialog.OnDateSetListener = DatePickerDialog.OnDateSetListener {
                 view, year, month, dayOfMonth ->
-            val selectedDate = twoDigits(dayOfMonth) + "/" + (twoDigits(month + 1)) + "/" + twoDigits(year)
+            val selectedDate =  twoDigits(year) + "-" + (twoDigits(month + 1)) + "-" + twoDigits(dayOfMonth)
+            Log.e("Date", "selected  $selectedDate  ")
             viewModel.inputs.dateActionReceive(selectedDate)
 
         }

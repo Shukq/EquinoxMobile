@@ -69,7 +69,7 @@ class AuthenticationUseCase : AuthenticationUseCase {
         username: String,
         password: String,
         name: String,
-        gender: Gender
+        gender: Gender,birthDate: String, occupation: String
     ): Observable<Result<SignUpResult>> {
         return Observable.create<Result<SignUpResult>> create@{ observer ->
             if (username == "loktar@gmail.com" && password == "Memes1234_"){

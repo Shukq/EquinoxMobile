@@ -122,7 +122,7 @@ interface Register2VM {
         override fun confirmAccAction(): Observable<SignUpResult> = this.confirmAccAction
 
         private fun signUpAction(model: SignUpModel, password: String) : Observable<Result<SignUpResult>>{
-            return environment.authenticationUseCase().signUp(model.email,password,model.name,model.gender)
+            return environment.authenticationUseCase().signUp(model.email,password,model.name,model.gender, model.date, model.ocupation)
                 .doOnComplete { this.loadingEnabled.onNext(false) }
                 .doOnSubscribe { this.loadingEnabled.onNext(true) }
         }
