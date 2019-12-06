@@ -4,6 +4,8 @@ package com.quinox.domain.entities
 
 
 class ContentfulUnit(
+    var idUnit: String,
     var title: String,
-    var description: String
+    var description: String,
+    var sections: List<ContentfulSection>
 )

@@ -1,6 +1,7 @@
 package com.quinox.domain.entities
 
 class ContentfulSection(
-    var title:String,
-    var unitId:String
+    var idSection: String,
+    var title: String,
+    var classes: List<ContentfulClass>
 )

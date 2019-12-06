@@ -9,6 +9,7 @@ import com.quinox.awsplatform.useCases.Contentful.Client
 import com.quinox.domain.useCases.AuthenticationUseCase
 import com.quinox.domain.useCases.ContentfulUseCase
 import com.quinox.domain.useCases.UseCaseProvider
+import io.reactivex.plugins.RxJavaPlugins
 import java.lang.Exception
 
 class UseCaseProvider (context : Context) : UseCaseProvider{
@@ -23,6 +24,9 @@ class UseCaseProvider (context : Context) : UseCaseProvider{
                 Log.e("INIT", "Initialization error.", e)            }
         })
         Client.initContentful()
+        RxJavaPlugins.setErrorHandler {
+            Log.e("Error",it.toString())
+        }
     }
 
     override fun makeAuthenticationUseCase(): AuthenticationUseCase {

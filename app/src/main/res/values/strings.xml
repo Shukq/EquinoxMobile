@@ -27,6 +27,8 @@
     <string name="text_confirm">Ingrese el código de verificación que ha sido enviado a tu correo electrónico</string>
     <string name="resend_confirm">Reenviar código</string>
     <string name="Close">Cerrar</string>
+    <string name="RetryText">Porfavor conecte su dispositivo a internet y vuelva a intentar</string>
+    <string name="Retry">Reintentar</string>
     <string name="Sorry">Lo sentimos</string>
     <string name="ErrorConfirm">Codigo de verificacion invalido</string>
     <string name="menu_home">Inicio</string>

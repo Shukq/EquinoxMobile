@@ -2,6 +2,7 @@ package com.quinox.mobile
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.Gravity
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
@@ -11,6 +12,7 @@ import androidx.drawerlayout.widget.DrawerLayout
 import com.google.android.material.navigation.NavigationView
 import androidx.appcompat.widget.Toolbar
 import android.view.Menu
+import android.view.MenuItem
 import androidx.appcompat.app.AlertDialog
 import com.quinox.mobile.anotations.RequiresActivityViewModel
 import com.quinox.mobile.base.BaseActivity
@@ -44,14 +46,29 @@ class HomeActivity : BaseActivity<HomeVM.ViewModel>() {
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
 
-        /*navView.setNavigationItemSelectedListener {
+
+
+
+        navView.setNavigationItemSelectedListener {
             when(it.itemId){
                 R.id.nav_exit -> {
                     signOutDialog()
                 }
+                R.id.nav_home -> {
+                    navController.navigate(R.id.nav_home)
+                    drawerLayout.closeDrawers()
+                }
+                R.id.nav_profile -> {
+                    navController.navigate(R.id.nav_profile)
+                    drawerLayout.closeDrawers()
+                }
+                R.id.nav_lessons -> {
+                    navController.navigate(R.id.nav_lessons)
+                    drawerLayout.closeDrawers()
+                }
             }
             return@setNavigationItemSelectedListener true
-        }*/
+        }
 
         composite.add(viewModel.outputs.signOutAction().observeOn(AndroidSchedulers.mainThread()).subscribe {
             val intent = Intent(this, MainActivity::class.java)
