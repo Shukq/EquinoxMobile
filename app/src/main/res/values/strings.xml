@@ -38,4 +38,7 @@
     <string name="registerTitle">Registro</string>
     <string name="logInTitle">Iniciar sesión</string>
     <string name="confirmTitle">Confirmar cuenta</string>
+    <string name="gender">Género</string>
+    <string name="male_es">Masculino</string>
+    <string name="female_es">Femenino</string>
 </resources>

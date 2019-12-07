@@ -11,6 +11,27 @@ import io.reactivex.Single
 import java.lang.Exception
 
 class AuthenticationUseCase : AuthenticationUseCase {
+    override fun getAttributes(): Observable<List<Pair<String, String>>> {
+        val single = Single.create<List<Pair<String, String>>> create@{ single ->
+           AWSMobileClient.getInstance().getUserAttributes(object:Callback<Map<String,String>>{
+               override fun onResult(result: Map<String, String>?) {
+                   var list : List<Pair<String,String>> = mutableListOf()
+                   if(result!=null){
+                       list = result.toList()
+                   }
+                   single.onSuccess(list)
+               }
+
+               override fun onError(e: Exception?) {
+                   Log.e("\uD83D\uDD34", "Platform, AuthenticationUseCase,getAttributes Error:", e)
+                   single.onSuccess(mutableListOf())
+               }
+
+           })
+        }
+        return single.toObservable()
+    }
+
     override fun resendConfirmationCode(username: String): Observable<Result<Boolean>> {
         val single = Single.create<Result<Boolean>> create@{ single ->
             AWSMobileClient.getInstance().resendSignUp(username,object : Callback<com.amazonaws.mobile.client.results.SignUpResult>{
