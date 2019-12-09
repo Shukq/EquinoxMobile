@@ -1,5 +1,6 @@
 package com.quinox.mobile.libs
 
+import android.content.Context
 import android.content.SharedPreferences
 import android.os.Parcelable
 import auto.parcel.AutoParcel
@@ -11,11 +12,13 @@ abstract class Environment : Parcelable {
     abstract fun authenticationUseCase(): AuthenticationUseCase
     abstract fun sharedPreferences(): SharedPreferences
     abstract fun contentfulUseCase(): ContentfulUseCase
+    abstract fun context(): Context
     @AutoParcel.Builder
     abstract class Builder {
         abstract fun authenticationUseCase(authenticationUseCase: AuthenticationUseCase) : Builder
         abstract fun sharedPreferences(sharedPreferences: SharedPreferences): Builder
         abstract fun contentfulUseCase(contentfulUseCase: ContentfulUseCase): Builder
+        abstract fun context(context: Context) : Builder
         abstract fun build() : Environment
     }
 

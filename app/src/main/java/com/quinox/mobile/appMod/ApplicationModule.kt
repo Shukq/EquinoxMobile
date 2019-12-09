@@ -2,6 +2,7 @@ package com.quinox.mobile.appMod
 
 import android.app.Activity
 import android.app.Application
+import android.content.Context
 import android.content.SharedPreferences
 import androidx.annotation.NonNull
 import com.quinox.awsplatform.useCases.UseCaseProvider
@@ -20,12 +21,14 @@ class ApplicationModule(@NonNull val application: Application) {
     fun provideEnvironment(
         @NonNull authenticationUseCase: AuthenticationUseCase,
         @NonNull sharedPreferences: SharedPreferences,
-        @NonNull contentfulUseCase: ContentfulUseCase
+        @NonNull contentfulUseCase: ContentfulUseCase,
+        @NonNull context: Context
     ): Environment {
         return Environment.builder()
             .authenticationUseCase(authenticationUseCase)
             .sharedPreferences(sharedPreferences)
             .contentfulUseCase(contentfulUseCase)
+            .context(context)
             .build()
     }
 
@@ -45,5 +48,11 @@ class ApplicationModule(@NonNull val application: Application) {
     @Singleton
     fun provideContentfulUseCase() : ContentfulUseCase{
         return provider.makeContentfulUseCase()
+    }
+
+    @Provides
+    @Singleton
+    fun provideContext() : Context{
+        return application.applicationContext
     }
 }
