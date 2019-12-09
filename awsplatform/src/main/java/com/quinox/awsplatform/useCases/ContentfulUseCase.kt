@@ -1,11 +1,14 @@
 package com.quinox.awsplatform.useCases
 
+import android.content.Context
 import android.util.Log
 import android.webkit.WebSettings
 import com.contentful.java.cda.CDAAsset
 import com.contentful.java.cda.CDAEntry
 import com.contentful.java.cda.rich.CDARichDocument
 import com.contentful.java.cda.rich.CDARichEmbeddedBlock
+import com.contentful.rich.android.AndroidContext
+import com.contentful.rich.android.AndroidProcessor
 import com.contentful.rich.html.HtmlContext
 import com.contentful.rich.html.HtmlProcessor
 import com.quinox.awsplatform.useCases.Contentful.Client
@@ -23,12 +26,68 @@ import io.reactivex.schedulers.Schedulers
 import java.lang.Exception
 
 class ContentfulUseCase:ContentfulUseCase{
-    override fun getUnits(): Observable<Result<List<ContentfulUnit>>> {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    override fun getUnits(context:Context): Observable<Result<List<ContentfulUnit>>> {
+        val listUnit = mutableListOf<ContentfulUnit>()
+        val single = Single.create<Result<List<ContentfulUnit>>> create@{ single ->
+            val unidad = client.observe(CDAEntry::class.java)
+                .where("content_type", "unidad")
+                .all()
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io())
+                .toObservable()
+            unidad.subscribe {
+                for (resource in it.items()) {
+                    val entry = resource as CDAEntry
+                    val id: String = entry.id()
+                    val title: String = entry.getField("numero")
+                    val richText: CDARichDocument = entry.getField("descripcion")
+                    val listSection = mutableListOf<ContentfulSection>()
+                    val sequenceProcessor = AndroidProcessor.creatingCharSequences()
+                    val contextAndroid = AndroidContext(context)
+                    val result = sequenceProcessor.process(contextAndroid,richText)
+                    val unit = ContentfulUnit(id,title,result.toString())
+                    listUnit.add(unit)
+                }
+                single.onSuccess(Result.success(listUnit))
+            }
+            unidad
+                .subscribeBy (
+                    onError = {
+                        single.onSuccess(Result.failure(Exception()))
+                    }
+                )
+        }
+        return single.toObservable()
     }
 
-    override fun getSections(unitId: String): Observable<Result<List<ContentfulSection>>> {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    override fun getSections(): Observable<Result<List<ContentfulSection>>> {
+        val listSection = mutableListOf<ContentfulSection>()
+        val single = Single.create<Result<List<ContentfulSection>>> create@{ single ->
+            val seccion = client.observe(CDAEntry::class.java)
+                .where("content_type", "secciones")
+                .all()
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io())
+                .toObservable()
+            seccion.subscribe {
+                for (resource in it.items()) {
+                    val entry = resource as CDAEntry
+                    val id: String = entry.id()
+                    val title: String = entry.getField("numeroDeSeccion")
+                    val idUnit: CDAEntry = entry.getField("unidad")
+                    val section = ContentfulSection(id,title,idUnit.id())
+                    listSection.add(section)
+                }
+                single.onSuccess(Result.success(listSection))
+            }
+            seccion
+                .subscribeBy (
+                    onError = {
+                        single.onSuccess(Result.failure(Exception()))
+                    }
+                )
+        }
+        return single.toObservable()
     }
 
     override fun getLessons(sectionId: String): Observable<Result<List<ContentfulClass>>> {

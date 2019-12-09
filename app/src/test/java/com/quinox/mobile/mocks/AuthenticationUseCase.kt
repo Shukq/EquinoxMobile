@@ -5,6 +5,10 @@ import com.quinox.domain.useCases.AuthenticationUseCase
 import io.reactivex.Observable
 
 class AuthenticationUseCase : AuthenticationUseCase {
+    override fun getAttributes(): Observable<List<Pair<String, String>>> {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
     override fun resendConfirmationCode(username: String): Observable<Result<Boolean>> {
         return Observable.create<Result<Boolean>> create@{ observer ->
             if (username == "loktar@gmail.com"){

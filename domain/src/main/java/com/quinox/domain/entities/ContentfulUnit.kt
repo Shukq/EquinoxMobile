@@ -7,5 +7,5 @@ class ContentfulUnit(
     var idUnit: String,
     var title: String,
     var description: String,
-    var sections: List<ContentfulSection>
+    var sections: MutableList<ContentfulSection> = mutableListOf()
 )

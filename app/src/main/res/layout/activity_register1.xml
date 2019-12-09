@@ -90,43 +90,53 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:srcCompat="@drawable/ic_arrow_forward_black_40dp" />
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/marginTop"
-        android:layout_marginStart="@dimen/marginStart"
-        android:layout_marginEnd="@dimen/marginEnd"
-        android:orientation="horizontal"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.488"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/lay_workRegister">
-
-        <ImageButton
-            android:id="@+id/datePicker"
-            android:layout_width="0dp"
-            android:layout_weight="0.1"
+        <LinearLayout
+            android:id="@+id/linearLayout"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/marginStart"
+            android:layout_marginTop="@dimen/marginTop"
+            android:layout_marginEnd="@dimen/marginEnd"
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.488"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/lay_workRegister">
 
-            android:backgroundTint="@android:color/transparent"
-            app:srcCompat="@drawable/ic_date_range_black_40dp" />
+            <ImageButton
+                android:id="@+id/datePicker"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.1"
 
-        <TextView
-            android:id="@+id/lbl_date"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="0.35"
-            android:layout_gravity="center_vertical"
-            android:textAlignment="center" />
+                android:backgroundTint="@android:color/transparent"
+                app:srcCompat="@drawable/ic_date_range_black_40dp" />
+
+            <TextView
+                android:id="@+id/lbl_date"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center|start"
+                android:layout_weight="0.35"
+                android:text="Fecha de nacimiento"
+                android:textAlignment="textStart" />
+
+        </LinearLayout>
 
         <Spinner
             android:id="@+id/spin_generoRegister"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="0.35"
             android:layout_gravity="center_vertical"
-            android:spinnerMode="dropdown" />
-    </LinearLayout>
+            android:layout_marginStart="@dimen/marginStart"
+            android:layout_marginTop="@dimen/marginTop"
+            android:layout_marginEnd="@dimen/marginEnd"
+            android:layout_weight="0.35"
+            android:spinnerMode="dropdown"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </ScrollView>
