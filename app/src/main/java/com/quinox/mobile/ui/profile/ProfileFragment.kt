@@ -65,4 +65,8 @@ class ProfileFragment : BaseFragment<ProfileVMFragment.ViewModel>() {
             }
         })
     }
+    override fun onDestroy() {
+        compositeDisposable.dispose()
+        super.onDestroy()
+    }
 }

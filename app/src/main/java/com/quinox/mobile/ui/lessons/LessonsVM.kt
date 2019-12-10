@@ -12,6 +12,7 @@ import io.reactivex.rxkotlin.Observables
 import io.reactivex.subjects.BehaviorSubject
 import io.reactivex.subjects.PublishSubject
 import com.quinox.domain.entities.Result
+import com.quinox.mobile.base.FragmentViewModel
 import java.lang.Exception
 
 interface LessonsVM {
@@ -25,7 +26,7 @@ interface LessonsVM {
         fun showInfo() : Observable<List<ContentfulUnit>>
     }
 
-    class ViewModel(@NonNull val environment: Environment) : ActivityViewModel<LessonsVM>(environment), Inputs, Outputs{
+    class ViewModel(@NonNull val environment: Environment) : FragmentViewModel<LessonsVM>(environment), Inputs, Outputs{
         val inputs : Inputs = this
         val outputs: Outputs = this
 

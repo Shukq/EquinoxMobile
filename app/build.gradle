@@ -76,4 +76,5 @@ dependencies {
 
     //Test
     testImplementation "org.robolectric:robolectric:$robolectric_version"
+    implementation 'com.android.support:cardview-v7:28.0.0'
 }
