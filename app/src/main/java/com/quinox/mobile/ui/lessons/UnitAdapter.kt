@@ -6,10 +6,11 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.quinox.domain.entities.ContentfulSection
 import com.quinox.domain.entities.ContentfulUnit
 import com.quinox.mobile.R
 
-class UnitAdapter : RecyclerView.Adapter<UnitAdapter.UnitVH>(){
+class UnitAdapter(val callback : (List<ContentfulSection>) -> Unit) : RecyclerView.Adapter<UnitAdapter.UnitVH>(){
     private var listUnits: List<ContentfulUnit> = listOf()
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): UnitVH {
         return UnitVH(LayoutInflater.from(parent.context).inflate(R.layout.recycler_unit_row,parent,false))
@@ -23,6 +24,10 @@ class UnitAdapter : RecyclerView.Adapter<UnitAdapter.UnitVH>(){
         val unit = listUnits[position]
         holder.title.text = unit.title
         holder.description.text = unit.description
+        holder.btnSections.isEnabled = unit.sections.isNotEmpty()
+        holder.btnSections.setOnClickListener {
+            callback(unit.sections)
+        }
     }
 
     fun setUnitList(unitList: List<ContentfulUnit>)

@@ -19,25 +19,30 @@ interface LessonsVM {
     interface Inputs {
         fun onCreate()
         fun retry()
+        fun openSectionPicker(sections: List<ContentfulSection>)
     }
     interface Outputs {
         fun showError() : Observable<String>
         fun loading() : Observable<Boolean>
         fun showInfo() : Observable<List<ContentfulUnit>>
+        fun sectionPicker() : Observable<List<ContentfulSection>>
     }
 
     class ViewModel(@NonNull val environment: Environment) : FragmentViewModel<LessonsVM>(environment), Inputs, Outputs{
+
         val inputs : Inputs = this
         val outputs: Outputs = this
 
         //Inputs
         private val onCreate = PublishSubject.create<Unit>()
         private val retry = PublishSubject.create<Unit>()
+        private val openSectionPicker = PublishSubject.create<List<ContentfulSection>>()
 
         //Outputs
         private val showError = BehaviorSubject.create<String>()
         private val loading = BehaviorSubject.create<Boolean>()
         private val showInfo = BehaviorSubject.create<List<ContentfulUnit>>()
+        private val sectionPicker = BehaviorSubject.create<List<ContentfulSection>>()
 
         init {
             val createEvent = onCreate
@@ -55,6 +60,9 @@ interface LessonsVM {
                 .filter { !it.isFail() }
                 .map { it.successValue() }
                 .subscribe(showInfo)
+
+            openSectionPicker
+                .subscribe(sectionPicker)
         }
 
         override fun onCreate() {
@@ -64,6 +72,12 @@ interface LessonsVM {
         override fun retry() {
             return this.retry.onNext(Unit)
         }
+
+        override fun openSectionPicker(sections: List<ContentfulSection>) {
+            return this.openSectionPicker.onNext(sections)
+        }
+
+        override fun sectionPicker(): Observable<List<ContentfulSection>> = this.sectionPicker
 
         override fun showError(): Observable<String> = this.showError
 

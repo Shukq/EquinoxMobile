@@ -187,7 +187,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/txt_error3Register2" />
         </com.google.android.material.textfield.TextInputLayout>
 
-        <com.google.android.material.button.MaterialButton
+        <Button
             android:id="@+id/create_account_btn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
