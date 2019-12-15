@@ -80,4 +80,7 @@ dependencies {
 
     //Material
     implementation 'com.google.android.material:material:1.2.0-alpha02'
+
+    //DrawableText
+    implementation 'com.amulyakhare:com.amulyakhare.textdrawable:1.0.1'
 }
