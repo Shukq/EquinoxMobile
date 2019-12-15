@@ -12,10 +12,7 @@ import com.contentful.rich.android.AndroidProcessor
 import com.contentful.rich.html.HtmlContext
 import com.contentful.rich.html.HtmlProcessor
 import com.quinox.awsplatform.useCases.Contentful.Client
-import com.quinox.domain.entities.ContentfulClass
-import com.quinox.domain.entities.ContentfulSection
-import com.quinox.domain.entities.ContentfulUnit
-import com.quinox.domain.entities.Result
+import com.quinox.domain.entities.*
 import com.quinox.domain.useCases.ContentfulUseCase
 import io.reactivex.Observable
 import io.reactivex.Single
@@ -41,7 +38,6 @@ class ContentfulUseCase:ContentfulUseCase{
                     val id: String = entry.id()
                     val title: String = entry.getField("numero")
                     val richText: CDARichDocument = entry.getField("descripcion")
-                    val listSection = mutableListOf<ContentfulSection>()
                     val sequenceProcessor = AndroidProcessor.creatingCharSequences()
                     val contextAndroid = AndroidContext(context)
                     val result = sequenceProcessor.process(contextAndroid,richText)
@@ -94,8 +90,48 @@ class ContentfulUseCase:ContentfulUseCase{
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
-    override fun getNews(): Observable<Result<String>> {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    override fun getNews(): Observable<Result<List<ContentfulNews>>> {
+        val listNews = mutableListOf<ContentfulNews>()
+        val single = Single.create<Result<List<ContentfulNews>>> create@{ single ->
+            val noticias = client.observe(CDAEntry::class.java)
+                .where("content_type","noticias")
+                .all()
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io())
+                .toObservable()
+            noticias.subscribe {
+                for (resource in it.items()) {
+                    val entry = resource as CDAEntry
+                    val id: String = entry.id()
+                    val title: String = entry.getField("titulo")
+                    val header: String = entry.getField("cabecera")
+                    val richText: CDARichDocument = entry.getField("descripcion")
+                    Log.e("titulo",title)
+                    val htmlContext = HtmlContext()
+                    val processor = HtmlProcessor()
+                    processor.overrideRenderer(
+                        { _, node -> node is CDARichEmbeddedBlock && node.data is CDAAsset },
+                        { processor1, node ->
+                            val block = node as CDARichEmbeddedBlock
+                            val data = block.data as CDAAsset
+                            return@overrideRenderer "<img src=http:${data.url()} style=\"width: 100%\" />"
+
+                        }
+                    )
+                    val html = processor.process(htmlContext,richText)
+                    val news = ContentfulNews(id,title,header,html)
+                    listNews.add(news)
+                }
+                single.onSuccess(Result.success(listNews))
+            }
+            noticias
+                .subscribeBy (
+                    onError = {
+                        single.onSuccess(Result.failure(Exception()))
+                    }
+                )
+        }
+        return single.toObservable()
     }
 
     private val client = Client.getContentful()

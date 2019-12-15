@@ -1,10 +1,7 @@
 package com.quinox.domain.useCases
 
 import android.content.Context
-import com.quinox.domain.entities.ContentfulClass
-import com.quinox.domain.entities.ContentfulSection
-import com.quinox.domain.entities.ContentfulUnit
-import com.quinox.domain.entities.Result
+import com.quinox.domain.entities.*
 import io.reactivex.Observable
 
 interface ContentfulUseCase {
@@ -13,5 +10,5 @@ interface ContentfulUseCase {
     fun getUnits(context:Context) : Observable<Result<List<ContentfulUnit>>>
     fun getSections() : Observable<Result<List<ContentfulSection>>>
     fun getLessons(sectionId:String) : Observable<Result<List<ContentfulClass>>>
-    fun getNews() : Observable<Result<String>>
+    fun getNews() : Observable<Result<List<ContentfulNews>>>
 }
