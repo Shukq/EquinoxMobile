@@ -2,6 +2,7 @@ package com.quinox.mobile
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.Gravity
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
@@ -14,11 +15,13 @@ import androidx.appcompat.widget.Toolbar
 import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.app.AlertDialog
+import com.amulyakhare.textdrawable.TextDrawable
 import com.quinox.mobile.anotations.RequiresActivityViewModel
 import com.quinox.mobile.base.BaseActivity
 import com.quinox.mobile.viewModels.HomeVM
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
+import kotlinx.android.synthetic.main.nav_header_home.*
 
 @RequiresActivityViewModel(HomeVM.ViewModel::class)
 class HomeActivity : BaseActivity<HomeVM.ViewModel>() {
@@ -46,7 +49,7 @@ class HomeActivity : BaseActivity<HomeVM.ViewModel>() {
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
 
-
+        viewModel.inputs.onCreate()
 
 
         navView.setNavigationItemSelectedListener {
@@ -78,6 +81,29 @@ class HomeActivity : BaseActivity<HomeVM.ViewModel>() {
             val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
             finishAffinity()
+        })
+
+        composite.add(viewModel.outputs.profileInfo().observeOn(AndroidSchedulers.mainThread()).subscribe {
+            it.forEach { pair ->
+                when(pair.first){
+                    "name" -> {
+                        Log.e("Info", pair.second)
+                        home_header_name.text = pair.second
+                        val initials = getUserInitials(pair.second)
+                        val drawable = TextDrawable.builder()
+                            .beginConfig()
+                            .width(150)
+                            .height(150)
+                            .bold()
+                            .endConfig()
+                            .buildRound(initials,getColor(R.color.secondaryColor))
+                        home_header_image.setImageDrawable(drawable)
+                    }
+                    "email" -> {
+                       home_header_email.text = pair.second
+                    }
+                }
+            }
         })
     }
 
@@ -114,5 +140,21 @@ class HomeActivity : BaseActivity<HomeVM.ViewModel>() {
         val dialog = builder.create()
         dialog.show()
     }
+
+    private fun getUserInitials(username : String) : String {
+        val splitedUsername = username.toUpperCase().split(" ")
+        val response = ""
+        if(splitedUsername.isEmpty()){
+            return response
+        }
+        return if (splitedUsername.size <= 1) {
+            splitedUsername[0].first().toString()
+        } else {
+            val firstInitial = splitedUsername[0].first()
+            val secondInitial = splitedUsername[1].first()
+            "$firstInitial$secondInitial"
+        }
+    }
+
 
 }

@@ -12,9 +12,11 @@ import io.reactivex.subjects.PublishSubject
 interface HomeVM {
     interface Inputs {
         fun signOutButtonPressed()
+        fun onCreate()
     }
     interface Outputs {
         fun signOutAction() : Observable<Unit>
+        fun profileInfo() : Observable<List<Pair<String, String>>>
     }
     class ViewModel(@NonNull val environment: Environment) : ActivityViewModel<HomeVM>(environment), Inputs, Outputs{
 
@@ -23,9 +25,11 @@ interface HomeVM {
 
         //Inputs
         private val signOutButtonPressed = PublishSubject.create<Unit>()
+        private val onCreate = PublishSubject.create<Unit>()
 
         //Outputs
         private val signOutAction = BehaviorSubject.create<Unit>()
+        private val profileInfo = BehaviorSubject.create<List<Pair<String, String>>>()
 
         init {
 
@@ -36,16 +40,36 @@ interface HomeVM {
                 .map {  return@map  }
                 .subscribe(this.signOutAction)
 
+            val profileEvent = onCreate
+                .flatMap { getProfile() }
+                .share()
+
+            profileEvent
+                .subscribe(profileInfo)
+
+
+
         }
 
         override fun signOutButtonPressed() {
             return this.signOutButtonPressed.onNext(Unit)
         }
 
+        override fun onCreate() {
+            return this.onCreate.onNext(Unit)
+        }
+
+        override fun profileInfo(): Observable<List<Pair<String, String>>> = this.profileInfo
+
         override fun signOutAction(): Observable<Unit> = this.signOutAction
 
         private fun signOut() : Observable<Result<UserStateResult>>{
             return environment.authenticationUseCase().signOut()
+        }
+
+        //helpers
+        private fun getProfile() : Observable<List<Pair<String, String>>>{
+            return environment.authenticationUseCase().getAttributes()
         }
     }
 }
