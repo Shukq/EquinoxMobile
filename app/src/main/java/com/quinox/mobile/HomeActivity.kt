@@ -39,7 +39,7 @@ class HomeActivity : BaseActivity<HomeVM.ViewModel>() {
         // menu should be considered as top level destinations.
         appBarConfiguration = AppBarConfiguration(
             setOf(
-                R.id.nav_home, R.id.nav_profile, R.id.nav_lessons,
+                R.id.nav_home, R.id.nav_profile, R.id.nav_lessons, R.id.nav_news,
                 R.id.nav_exit
             ), drawerLayout
         )
@@ -60,6 +60,10 @@ class HomeActivity : BaseActivity<HomeVM.ViewModel>() {
                 }
                 R.id.nav_profile -> {
                     navController.navigate(R.id.nav_profile)
+                    drawerLayout.closeDrawers()
+                }
+                R.id.nav_news -> {
+                    navController.navigate(R.id.nav_news)
                     drawerLayout.closeDrawers()
                 }
                 R.id.nav_lessons -> {
