@@ -1,10 +1,8 @@
 package com.quinox.mobile.ui.lessons
 
-import android.util.Log
 import androidx.annotation.NonNull
 import com.quinox.domain.entities.ContentfulSection
 import com.quinox.domain.entities.ContentfulUnit
-import com.quinox.mobile.base.ActivityViewModel
 import com.quinox.mobile.libs.Environment
 import io.reactivex.Observable
 import io.reactivex.Single
@@ -20,12 +18,14 @@ interface LessonsVM {
         fun onCreate()
         fun retry()
         fun openSectionPicker(sections: List<ContentfulSection>)
+        fun selectedSection(section: ContentfulSection)
     }
     interface Outputs {
         fun showError() : Observable<String>
         fun loading() : Observable<Boolean>
         fun showInfo() : Observable<List<ContentfulUnit>>
         fun sectionPicker() : Observable<List<ContentfulSection>>
+        fun selectedSectionAction() : Observable<ContentfulSection>
     }
 
     class ViewModel(@NonNull val environment: Environment) : FragmentViewModel<LessonsVM>(environment), Inputs, Outputs{
@@ -37,12 +37,14 @@ interface LessonsVM {
         private val onCreate = PublishSubject.create<Unit>()
         private val retry = PublishSubject.create<Unit>()
         private val openSectionPicker = PublishSubject.create<List<ContentfulSection>>()
+        private val selectedSection = PublishSubject.create<ContentfulSection>()
 
         //Outputs
         private val showError = BehaviorSubject.create<String>()
         private val loading = BehaviorSubject.create<Boolean>()
         private val showInfo = BehaviorSubject.create<List<ContentfulUnit>>()
         private val sectionPicker = BehaviorSubject.create<List<ContentfulSection>>()
+        private val selectedSectionAction = BehaviorSubject.create<ContentfulSection>()
 
         init {
             val createEvent = onCreate
@@ -63,6 +65,9 @@ interface LessonsVM {
 
             openSectionPicker
                 .subscribe(sectionPicker)
+
+            selectedSection
+                .subscribe(selectedSectionAction)
         }
 
         override fun onCreate() {
@@ -76,6 +81,12 @@ interface LessonsVM {
         override fun openSectionPicker(sections: List<ContentfulSection>) {
             return this.openSectionPicker.onNext(sections)
         }
+
+        override fun selectedSection(section: ContentfulSection) {
+            return this.selectedSection.onNext(section)
+        }
+
+        override fun selectedSectionAction(): Observable<ContentfulSection> = this.selectedSectionAction
 
         override fun sectionPicker(): Observable<List<ContentfulSection>> = this.sectionPicker
 
