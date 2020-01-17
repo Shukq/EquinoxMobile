@@ -3,6 +3,7 @@ package com.quinox.awsplatform.useCases
 import android.content.Context
 import android.util.Log
 import android.webkit.WebSettings
+import com.contentful.java.cda.CDAArray
 import com.contentful.java.cda.CDAAsset
 import com.contentful.java.cda.CDAEntry
 import com.contentful.java.cda.rich.CDARichDocument
@@ -87,7 +88,41 @@ class ContentfulUseCase:ContentfulUseCase{
     }
 
     override fun getLessons(sectionId: String): Observable<Result<List<ContentfulClass>>> {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        val listNews = mutableListOf<ContentfulClass>()
+        val single = Single.create<Result<List<ContentfulClass>>> create@{ single ->
+            val lesson = client.observe(CDAEntry::class.java)
+                .where("content_type","cursoV1")
+                .linksToEntryId(sectionId)
+                .all()
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io())
+                .toObservable()
+            lesson.subscribe {
+                for (resource in it.items()){
+                    val entry = resource as CDAEntry
+                    val id: String = entry.id()
+                    val title: String = entry.getField("titulo")
+                    val richText: CDARichDocument = entry.getField("descripcion")
+                    val htmlContext = HtmlContext()
+                    val processor = HtmlProcessor()
+                    processor.overrideRenderer(
+                        { _, node -> node is CDARichEmbeddedBlock && node.data is CDAAsset },
+                        { processor1, node ->
+                            val block = node as CDARichEmbeddedBlock
+                            val data = block.data as CDAAsset
+                            return@overrideRenderer "<img src=http:${data.url()} style=\"width: 100%\" />"
+
+                        }
+                    )
+                    val html = processor.process(htmlContext,richText)
+                    val asset = entry.getField<CDAArray>("media")
+
+
+                }
+            }
+
+        }
+        return single.toObservable()
     }
 
     override fun getNews(): Observable<Result<List<ContentfulNews>>> {
@@ -106,7 +141,6 @@ class ContentfulUseCase:ContentfulUseCase{
                     val title: String = entry.getField("titulo")
                     val header: String = entry.getField("cabecera")
                     val richText: CDARichDocument = entry.getField("descripcion")
-                    Log.e("titulo",title)
                     val htmlContext = HtmlContext()
                     val processor = HtmlProcessor()
                     processor.overrideRenderer(
