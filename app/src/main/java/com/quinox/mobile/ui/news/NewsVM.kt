@@ -19,11 +19,13 @@ interface NewsVM {
     interface Inputs {
         fun onCreate()
         fun retry()
+        fun newsClicked(news: ContentfulNews)
     }
     interface Outputs {
         fun showError() : Observable<String>
         fun loading() : Observable<Boolean>
         fun showInfo() : Observable<List<ContentfulNews>>
+        fun goToNews() : Observable<ContentfulNews>
     }
 
     class ViewModel(@NonNull val environment: Environment) : FragmentViewModel<NewsVM>(environment), Inputs, Outputs{
@@ -34,11 +36,13 @@ interface NewsVM {
         //Inputs
         private val onCreate = PublishSubject.create<Unit>()
         private val retry = PublishSubject.create<Unit>()
+        private val newsClicked = PublishSubject.create<ContentfulNews>()
 
         //Outputs
         private val showError = BehaviorSubject.create<String>()
         private val loading = BehaviorSubject.create<Boolean>()
         private val showInfo = BehaviorSubject.create<List<ContentfulNews>>()
+        private val goToNews = BehaviorSubject.create<ContentfulNews>()
 
         init {
             val createEvent = onCreate
@@ -57,6 +61,8 @@ interface NewsVM {
                 .map { it.successValue() }
                 .subscribe(showInfo)
 
+            newsClicked
+                .subscribe(goToNews)
         }
 
         override fun onCreate() {
@@ -67,12 +73,18 @@ interface NewsVM {
             return this.retry.onNext(Unit)
         }
 
+        override fun newsClicked(news: ContentfulNews) {
+            return this.newsClicked.onNext(news)
+        }
+
 
         override fun showError(): Observable<String> = this.showError
 
         override fun loading(): Observable<Boolean> = this.loading
 
         override fun showInfo(): Observable<List<ContentfulNews>> = this.showInfo
+
+        override fun goToNews(): Observable<ContentfulNews> = this.goToNews
 
         private fun eventServer() : Observable<Result<List<ContentfulNews>>> {
 

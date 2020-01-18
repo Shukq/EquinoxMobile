@@ -11,7 +11,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".LessonsActivity"></activity>
+        <activity android:name=".NewsActivity"></activity>
+        <activity android:name=".LessonsActivity" />
         <activity android:name=".ProfileActivity" />
         <activity android:name=".ConfirmAccActivity" />
         <activity
