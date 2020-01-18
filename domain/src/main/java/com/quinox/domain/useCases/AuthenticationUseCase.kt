@@ -16,4 +16,6 @@ interface AuthenticationUseCase {
     fun resendConfirmationCode(username: String) : Observable<Result<Boolean>>
 
     fun getAttributes() : Observable<List<Pair<String,String>>>
+    fun initForgotPassword(email : String) : Observable<Result<String>>
+    fun confirmForgotPassword(newPassword: String, code: String) : Observable<Result<Boolean>>
 }

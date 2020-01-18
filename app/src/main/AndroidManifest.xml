@@ -11,7 +11,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".NewsActivity"></activity>
+        <activity android:name=".ConfirmForgotPasswordActivity"></activity>
+        <activity android:name=".ForgotPasswordActivity" />
+        <activity android:name=".NewsActivity" />
         <activity android:name=".LessonsActivity" />
         <activity android:name=".ProfileActivity" />
         <activity android:name=".ConfirmAccActivity" />

@@ -9,6 +9,12 @@ object ValidationService {
     private val minPasswordLenght = 8
     private val maxPasswordLenght = 20
 
+    fun validateConfirmForgotPassword(confirmationCode : String, password: String) : Boolean{
+        val confirmationCodeValidation = validateVerificationCode(confirmationCode)
+        val passwordValidation = validatePassword(password)
+        return confirmationCodeValidation && passwordValidation
+    }
+
     fun isValidEmail(username : String): Boolean{
         return Patterns.EMAIL_ADDRESS.matcher(username).matches()
     }

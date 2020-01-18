@@ -4,6 +4,8 @@ import android.util.Log
 import com.amazonaws.mobile.client.AWSMobileClient
 import com.amazonaws.mobile.client.Callback
 import com.amazonaws.mobile.client.UserState
+import com.amazonaws.mobile.client.results.ForgotPasswordResult
+import com.amazonaws.mobile.client.results.ForgotPasswordState
 import com.quinox.domain.entities.*
 import com.quinox.domain.useCases.AuthenticationUseCase
 import io.reactivex.Observable
@@ -11,6 +13,58 @@ import io.reactivex.Single
 import java.lang.Exception
 
 class AuthenticationUseCase : AuthenticationUseCase {
+    override fun initForgotPassword(email : String) : Observable<Result<String>>{
+        val single = Single.create<Result<String>> create@{ single ->
+            AWSMobileClient.getInstance().forgotPassword(email, object: Callback<ForgotPasswordResult>{
+                override fun onResult(result: ForgotPasswordResult?) {
+                    val response = result?.parameters
+                    if(response != null){
+                        Log.e("ForgotPassword",response.deliveryMedium)
+                        Log.e("ForgotPassword",response.destination)
+                        single.onSuccess(Result.success(response.destination))
+                    }
+                    else{
+                        single.onSuccess(Result.failure(Exception()))
+                    }
+                }
+
+                override fun onError(e: Exception?) {
+                    Log.e("\uD83D\uDD34", "Platform, AuthenticationUseCase,initForgotPassword Error:", e)
+                    single.onSuccess(Result.failure(e))
+                }
+
+            })
+        }
+        return single.toObservable()
+    }
+
+    override fun confirmForgotPassword(newPassword: String, code: String) : Observable<Result<Boolean>>{
+        val single = Single.create<Result<Boolean>> create@{ single ->
+            AWSMobileClient.getInstance().confirmForgotPassword(newPassword, code,  object: Callback<ForgotPasswordResult>{
+                override fun onResult(result: ForgotPasswordResult?) {
+                    if(result!= null) {
+                        Log.e("confirmForgotPassword",result.state.name)
+                        val confirmation = when(result.state){
+                            ForgotPasswordState.DONE -> true
+                            else -> false
+                        }
+                        single.onSuccess(Result.success(confirmation))
+                    }
+                    else{
+                        single.onSuccess(Result.failure(Exception()))
+                    }
+                }
+
+                override fun onError(e: Exception?) {
+                    Log.e("\uD83D\uDD34", "Platform, AuthenticationUseCase,confirmForgotPassword Error:", e)
+                    single.onSuccess(Result.failure(e))
+                }
+
+            })
+        }
+        return single.toObservable()
+    }
+
     override fun getAttributes(): Observable<List<Pair<String, String>>> {
         val single = Single.create<List<Pair<String, String>>> create@{ single ->
            AWSMobileClient.getInstance().getUserAttributes(object:Callback<Map<String,String>>{

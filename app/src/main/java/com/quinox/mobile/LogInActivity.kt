@@ -29,6 +29,11 @@ class LogInActivity : BaseActivity<SignInVM.ViewModel>() {
         btn_logLogIn.setOnClickListener {
             viewModel.inputs.signInButtonPressed()
         }
+
+        txt_forgotPassLogIn.setOnClickListener {
+            viewModel.inputs.forgotPasswordPressed()
+        }
+
         input_userLogIn.onChange {
             viewModel.inputs.username(it)
         }
@@ -57,6 +62,11 @@ class LogInActivity : BaseActivity<SignInVM.ViewModel>() {
             val intent = Intent(this,HomeActivity::class.java)
             startActivity(intent)
             finish()
+        })
+
+        disposable.add(viewModel.outputs.forgotPasswordAction().observeOn(AndroidSchedulers.mainThread()).subscribe {
+            val intent = Intent(this, ForgotPasswordActivity::class.java)
+            startActivity(intent)
         })
     }
 

@@ -41,4 +41,13 @@
     <string name="gender">Género</string>
     <string name="male_es">Masculino</string>
     <string name="female_es">Femenino</string>
+    <string name="Continue">Continuar</string>
+    <string name="Forgot_password_message">Ingrese su email para enviar un código de confirmación para recuperar su contraseña</string>
+    <string name="Forgot_password">Olvidé la contraseña</string>
+    <string name="Sign_up_length_rule">Entre 8 y 20 caracteres</string>
+    <string name="Sign_up_lower_case_capital_letters_rule">Una letra mayúscula y una letra minúscula</string>
+    <string name="Sign_up_number_rule">Un caracter numérico (0-9)</string>
+    <string name="Sign_up_phone_number_rule">El número de teléfono debe contener 8 dígitos</string>
+    <string name="Sign_up_character_rule">Un caracter especial !$#@_-.+</string>
+    <string name="Forgot_password_success_message">Modificación Exitosa, Contraseña modificada correctamente. Por favor intente iniciar sesión nuevamente.</string>
 </resources>

@@ -17,6 +17,7 @@ interface SignInVM {
         fun username(username: String)
         fun password(password: String)
         fun signInButtonPressed()
+        fun forgotPasswordPressed()
 
     }
     interface Outputs {
@@ -25,6 +26,7 @@ interface SignInVM {
         fun signInButtonIsEnabled() : Observable<Boolean>
         fun signedInAction(): Observable<Unit>
         fun showConfirmationAlert() : Observable<Unit>
+        fun forgotPasswordAction() : Observable<Unit>
     }
 
     class ViewModel(@NonNull val environment: Environment) : ActivityViewModel<SignInVM>(environment), Inputs, Outputs{
@@ -34,7 +36,7 @@ interface SignInVM {
         private val usernameEditTextChanged =  PublishSubject.create<String>()
         private val passwordEditTextChanged =  PublishSubject.create<String>()
         private val signInButtonPressed = PublishSubject.create<Unit>()
-
+        private val forgotPasswordPressed = PublishSubject.create<Unit>()
 
         //Outputs
         private val signInButtonIsEnabled = BehaviorSubject.create<Boolean>()
@@ -42,6 +44,7 @@ interface SignInVM {
         private val showError = BehaviorSubject.create<String>()
         private val showConfirmationAlert = BehaviorSubject.create<Unit>()
         private val signedInAction = BehaviorSubject.create<Unit>()
+        private val forgotPasswordAction = BehaviorSubject.create<Unit>()
 
 
         val inputs : Inputs = this
@@ -88,8 +91,8 @@ interface SignInVM {
                 .map { Unit }
                 .subscribe(this.signedInAction)
 
-
-
+            forgotPasswordPressed
+                .subscribe(this.forgotPasswordAction)
 
         }
         override fun username(username: String) = this.usernameEditTextChanged.onNext(username)
@@ -97,6 +100,10 @@ interface SignInVM {
         override fun password(password: String) = this.passwordEditTextChanged.onNext(password)
 
         override fun signInButtonPressed() = this.signInButtonPressed.onNext(Unit)
+
+        override fun forgotPasswordPressed() = this.forgotPasswordPressed.onNext(Unit)
+
+        override fun forgotPasswordAction(): Observable<Unit> = this.forgotPasswordAction
 
         override fun signInButtonIsEnabled(): Observable<Boolean> = this.signInButtonIsEnabled
 
