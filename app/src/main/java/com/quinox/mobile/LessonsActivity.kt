@@ -1,17 +1,15 @@
 package com.quinox.mobile
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.quinox.mobile.anotations.RequiresActivityViewModel
 import com.quinox.mobile.base.BaseActivity
-import com.quinox.mobile.viewModels.LessonsVM
+import com.quinox.mobile.viewModels.ClassesVM
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
-import kotlinx.android.synthetic.main.activity_lessons.*
 
 
-@RequiresActivityViewModel(LessonsVM.ViewModel::class)
-class LessonsActivity : BaseActivity<LessonsVM.ViewModel>() {
+@RequiresActivityViewModel(ClassesVM.ViewModel::class)
+class LessonsActivity : BaseActivity<ClassesVM.ViewModel>() {
     private val compositeDisposable = CompositeDisposable()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

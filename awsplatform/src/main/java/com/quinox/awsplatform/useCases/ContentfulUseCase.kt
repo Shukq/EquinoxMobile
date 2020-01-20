@@ -87,8 +87,9 @@ class ContentfulUseCase:ContentfulUseCase{
         return single.toObservable()
     }
 
-    override fun getLessons(sectionId: String): Observable<Result<List<ContentfulClass>>> {
-        val listNews = mutableListOf<ContentfulClass>()
+    override fun getLessons(sectionId: String,context: Context): Observable<Result<List<ContentfulClass>>> {
+        Log.e("ENTRO","SI")
+        val listClass = mutableListOf<ContentfulClass>()
         val single = Single.create<Result<List<ContentfulClass>>> create@{ single ->
             val lesson = client.observe(CDAEntry::class.java)
                 .where("content_type","cursoV1")
@@ -115,8 +116,21 @@ class ContentfulUseCase:ContentfulUseCase{
                         }
                     )
                     val html = processor.process(htmlContext,richText)
-                    val asset = entry.getField<CDAArray>("media")
+                    val assets : List<CDAAsset>? = entry.getField("media")
+                    val listAsset : MutableList<String> = mutableListOf()
+                    assets?.forEach {
+                        listAsset.add(it.url())
+                        Log.e("CLASE-url",it.url())
+                    }
 
+
+
+
+                    val lessonObj = ContentfulClass(id,title,html,listAsset,"")
+                    Log.e("CLASE-id",lessonObj.id)
+                    Log.e("CLASE-title",lessonObj.title)
+                    Log.e("CLASE-desc",lessonObj.descripcion)
+                    Log.e("CLASE-video",lessonObj.urlVideo)
 
                 }
             }
