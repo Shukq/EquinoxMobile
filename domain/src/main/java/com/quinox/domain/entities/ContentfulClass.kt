@@ -6,6 +6,6 @@ class ContentfulClass(
     var title:String,
     var descripcion:String?,
     var imagenes:List<String>,
-    var urlVideo:String
+    var urlVideo:String?
 
 )

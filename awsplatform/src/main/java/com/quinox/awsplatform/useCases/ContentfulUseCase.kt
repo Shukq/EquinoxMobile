@@ -22,6 +22,7 @@ import io.reactivex.plugins.RxJavaPlugins
 import io.reactivex.rxkotlin.subscribeBy
 import io.reactivex.schedulers.Schedulers
 import java.lang.Exception
+import org.jsoup.Jsoup
 
 class ContentfulUseCase:ContentfulUseCase{
     override fun getUnits(context:Context): Observable<Result<List<ContentfulUnit>>> {
@@ -123,14 +124,35 @@ class ContentfulUseCase:ContentfulUseCase{
                         Log.e("CLASE-url",it.url())
                     }
 
+                    val richTextVideo: CDARichDocument? = entry.getField("urlVideo")
+                    processor.overrideRenderer(
+                        { _, node -> node is CDARichEmbeddedBlock && node.data is CDAAsset },
+                        { processor1, node ->
+                            val block = node as CDARichEmbeddedBlock
+                            val data = block.data as CDAAsset
+                            return@overrideRenderer "<img src=http:${data.url()} style=\"width: 100%\" />"
 
+                        }
+                    )
+                    if(richTextVideo != null)
+                    {
+                        val htmlVideo = processor.process(htmlContext,richTextVideo)
+                        val doc = Jsoup.parse(htmlVideo)
+                        val urlVideo = doc.select("div a")
+                        val lessonObj = ContentfulClass(id,title,html,listAsset,urlVideo.attr("href"))
+                        Log.e("CLASE-id",lessonObj.id)
+                        Log.e("CLASE-title",lessonObj.title)
+                        Log.e("CLASE-desc",lessonObj.descripcion)
+                        Log.e("CLASE-video",urlVideo.attr("href"))
+                    }
+                    else
+                    {
+                        val lessonObj = ContentfulClass(id,title,html,listAsset,null)
+                        Log.e("CLASE-id",lessonObj.id)
+                        Log.e("CLASE-title",lessonObj.title)
+                        Log.e("CLASE-desc",lessonObj.descripcion)
+                    }
 
-
-                    val lessonObj = ContentfulClass(id,title,html,listAsset,"")
-                    Log.e("CLASE-id",lessonObj.id)
-                    Log.e("CLASE-title",lessonObj.title)
-                    Log.e("CLASE-desc",lessonObj.descripcion)
-                    Log.e("CLASE-video",lessonObj.urlVideo)
 
                 }
             }
