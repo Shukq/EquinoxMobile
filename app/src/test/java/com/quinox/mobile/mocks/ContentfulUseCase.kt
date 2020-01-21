@@ -1,15 +1,19 @@
 package com.quinox.mobile.mocks
 
 import android.content.Context
-import com.quinox.domain.entities.ContentfulClass
-import com.quinox.domain.entities.ContentfulSection
-import com.quinox.domain.entities.ContentfulUnit
-import com.quinox.domain.entities.Result
+import com.quinox.domain.entities.*
 import com.quinox.domain.useCases.ContentfulUseCase
 import io.reactivex.Observable
 import io.reactivex.Single
 
 class ContentfulUseCase : ContentfulUseCase {
+    override fun getLessons(
+        sectionId: String,
+        context: Context
+    ): Observable<Result<List<ContentfulClass>>> {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
     override fun getHomePage(): Observable<Result<String>> {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
@@ -42,11 +46,8 @@ class ContentfulUseCase : ContentfulUseCase {
         return single.toObservable()
     }
 
-    override fun getLessons(sectionId: String): Observable<Result<List<ContentfulClass>>> {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
 
-    override fun getNews(): Observable<Result<String>> {
+    override fun getNews(): Observable<Result<List<ContentfulNews>>> {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 }

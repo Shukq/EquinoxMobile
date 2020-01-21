@@ -3,10 +3,44 @@ package com.quinox.mobile.mocks
 import com.quinox.domain.entities.*
 import com.quinox.domain.useCases.AuthenticationUseCase
 import io.reactivex.Observable
+import io.reactivex.Single
+import java.lang.Exception
 
 class AuthenticationUseCase : AuthenticationUseCase {
+    override fun initForgotPassword(email: String): Observable<Result<String>> {
+        val single = Single.create<Result<String>> create@{ single ->
+            if (email == "loktar@gmail.com" ){
+                single.onSuccess(Result.success(email))
+            }else{
+                single.onSuccess(Result.failure(Exception()))
+            }
+        }
+        return single.toObservable()
+    }
+
+    override fun confirmForgotPassword(
+        newPassword: String,
+        code: String
+    ): Observable<Result<Boolean>> {
+        val single = Single.create<Result<Boolean>> create@{ single ->
+            if(newPassword == "123Admin_" && code == "123456"){
+                single.onSuccess(Result.success(true))
+            }else{
+                single.onSuccess(Result.failure(Exception()))
+            }
+        }
+        return single.toObservable()
+    }
+
     override fun getAttributes(): Observable<List<Pair<String, String>>> {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        val single = Single.create<List<Pair<String, String>>> create@{ single ->
+            val list = mutableListOf<Pair<String,String>>()
+            list.add(Pair("email","loktar@gmail.com"))
+            list.add(Pair("name","Admin"))
+            list.add(Pair("gender","male"))
+            single.onSuccess((list))
+        }
+        return single.toObservable()
     }
 
     override fun resendConfirmationCode(username: String): Observable<Result<Boolean>> {
