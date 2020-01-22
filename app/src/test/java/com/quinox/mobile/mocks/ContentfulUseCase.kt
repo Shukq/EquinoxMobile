@@ -5,13 +5,22 @@ import com.quinox.domain.entities.*
 import com.quinox.domain.useCases.ContentfulUseCase
 import io.reactivex.Observable
 import io.reactivex.Single
+import java.lang.Exception
 
 class ContentfulUseCase : ContentfulUseCase {
     override fun getLessons(
         sectionId: String,
         context: Context
     ): Observable<Result<List<ContentfulClass>>> {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        val single = Single.create<Result<List<ContentfulClass>>> create@{ single ->
+            if(sectionId == "123"){
+                val list = mutableListOf<ContentfulClass>()
+                single.onSuccess(Result.success(list))
+            }else{
+                single.onSuccess(Result.failure(Exception()))
+            }
+        }
+       return single.toObservable()
     }
 
     override fun getHomePage(): Observable<Result<String>> {
