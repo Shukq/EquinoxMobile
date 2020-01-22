@@ -121,7 +121,6 @@ class ContentfulUseCase:ContentfulUseCase{
                     val listAsset : MutableList<String> = mutableListOf()
                     assets?.forEach {
                         listAsset.add(it.url())
-                        Log.e("CLASE-url",it.url())
                     }
 
                     val richTextVideo: CDARichDocument? = entry.getField("urlVideo")
@@ -140,22 +139,25 @@ class ContentfulUseCase:ContentfulUseCase{
                         val doc = Jsoup.parse(htmlVideo)
                         val urlVideo = doc.select("div a")
                         val lessonObj = ContentfulClass(id,title,html,listAsset,urlVideo.attr("href"))
-                        Log.e("CLASE-id",lessonObj.id)
-                        Log.e("CLASE-title",lessonObj.title)
-                        Log.e("CLASE-desc",lessonObj.descripcion)
-                        Log.e("CLASE-video",urlVideo.attr("href"))
+                        listClass.add(lessonObj)
                     }
                     else
                     {
                         val lessonObj = ContentfulClass(id,title,html,listAsset,null)
-                        Log.e("CLASE-id",lessonObj.id)
-                        Log.e("CLASE-title",lessonObj.title)
-                        Log.e("CLASE-desc",lessonObj.descripcion)
+                        listClass.add(lessonObj)
                     }
 
 
                 }
+                single.onSuccess(Result.success(listClass))
             }
+            lesson
+                .subscribeBy (
+                    onError = {
+                        single.onSuccess(Result.failure(Exception()))
+                    }
+                )
+
 
         }
         return single.toObservable()
