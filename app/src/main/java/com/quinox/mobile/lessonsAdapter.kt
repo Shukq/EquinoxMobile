@@ -27,7 +27,7 @@ class lessonsAdapter(val callback : (ContentfulClass) -> Unit) : RecyclerView.Ad
     override fun onBindViewHolder(holder: lessonVH, position: Int) {
         val lesson = listClasses[position]
         holder.title.text = lesson.title
-        val number = "Clase: "+ (position + 1).toString()
+        val number = "Clase "+ (position + 1).toString()
         holder.classNumber.text = number
         holder.cv.setOnClickListener {
             callback(lesson)
