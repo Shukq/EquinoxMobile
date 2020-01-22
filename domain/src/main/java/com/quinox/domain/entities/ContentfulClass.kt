@@ -1,5 +1,7 @@
 package com.quinox.domain.entities
 
+import java.io.Serializable
+
 
 class ContentfulClass(
     var id:String,
@@ -8,4 +10,4 @@ class ContentfulClass(
     var imagenes:List<String>,
     var urlVideo:String?
 
-)
+) : Serializable

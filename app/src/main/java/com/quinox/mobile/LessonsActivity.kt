@@ -29,7 +29,9 @@ class LessonsActivity : BaseActivity<ClassesVM.ViewModel>() {
             supportActionBar?.title = it.title
         })
         compositeDisposable.add(viewModel.outputs.classPicker().observeOn(AndroidSchedulers.mainThread()).subscribe {
-            val intent = Intent()
+            val intent = Intent(this,LessonDetailActivity::class.java)
+            intent.putExtra("clase",it)
+            startActivity(intent)
         })
         compositeDisposable.add(viewModel.outputs.classList().observeOn(AndroidSchedulers.mainThread()).subscribe{
             adapter.setLessonList(it)
