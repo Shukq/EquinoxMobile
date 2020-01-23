@@ -74,6 +74,9 @@ dependencies {
     //Picasso
     implementation 'com.squareup.picasso:picasso:2.71828'
 
+    //Youtube Player
+    implementation 'com.pierfrancescosoffritti.androidyoutubeplayer:core:10.0.5'
+
     //Aux cognitoAuthHandlerClass
     implementation 'com.amazonaws:aws-android-sdk-cognitoauth:2.10.0'
 

@@ -15,10 +15,11 @@
             android:id="@+id/txt_titleClassDetail"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/marginTop"
             android:layout_marginStart="@dimen/marginStart"
+            android:layout_marginTop="@dimen/marginTop"
             android:layout_marginEnd="@dimen/marginEnd"
             android:text="Titulo"
+            android:textAppearance="@style/TextAppearance.AppCompat.Display1"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -27,13 +28,13 @@
             android:id="@+id/webViewClassDetail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/marginTop"
             android:layout_marginStart="@dimen/marginStart"
+            android:layout_marginTop="@dimen/marginTop"
             android:layout_marginEnd="@dimen/marginEnd"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.494"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/txt_titleClassDetail" >
+            app:layout_constraintTop_toBottomOf="@+id/txt_titleClassDetail">
 
         </WebView>
 
@@ -41,12 +42,23 @@
             android:id="@+id/recyclerViewClassDetail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/marginTop"
             android:layout_marginStart="@dimen/marginStart"
+            android:layout_marginTop="@dimen/marginTop"
             android:layout_marginEnd="@dimen/marginEnd"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/webViewClassDetail" />
+
+
+        <com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView
+            android:id="@+id/third_party_player_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="88dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/recyclerViewClassDetail" />
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
