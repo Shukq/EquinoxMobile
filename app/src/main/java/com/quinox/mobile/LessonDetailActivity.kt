@@ -37,6 +37,7 @@ class LessonDetailActivity : BaseActivity<LessonDetailVM.ViewModel>() {
         imgAlbum.layoutManager = imgManager
         adapterImg = ImageAdapter(this)
         imgAlbum.adapter = adapterImg
+        youtubePlayer.visibility = View.GONE
 
         /*youtubePlayer.getPlayerUiController().showFullscreenButton(true)
         youtubePlayer.getPlayerUiController().setFullScreenButtonClickListener(View.OnClickListener {
@@ -69,16 +70,17 @@ class LessonDetailActivity : BaseActivity<LessonDetailVM.ViewModel>() {
                 youtubePlayer.addYouTubePlayerListener(object: AbstractYouTubePlayerListener(){
                     override fun onReady(@NonNull youTubePlayer: YouTubePlayer) {
                         if(videoId != null){
+                            youtubePlayer.visibility = View.VISIBLE
                             youTubePlayer.cueVideo(videoId,0f)
+                        }
+                        else
+                        {
+                            youtubePlayer.release()
+
                         }
                     }
                 })
             }
-            else
-            {
-                youtubePlayer.release()
-            }
-
         })
     }
 
