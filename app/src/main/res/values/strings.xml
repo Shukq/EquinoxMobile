@@ -13,10 +13,24 @@
 
     <string name="male">Hombre</string>
     <string name="female">Mujer</string>
+    <string name="other">Otro</string>
+
+    <string name="student">Estudiante</string>
+    <string name="teacher">Profesor</string>
+    <string name="admin">Administrativo</string>
+    <string name="otherOcu">Otro</string>
 
     <string-array name="spin_Gender">
         <item>@string/male</item>
         <item>@string/female</item>
+        <item>@string/other</item>
+    </string-array>
+
+    <string-array name="spin_Ocupation">
+        <item>@string/student</item>
+        <item>@string/teacher</item>
+        <item>@string/admin</item>
+        <item>@string/otherOcu</item>
     </string-array>
 
     <string name="name_register">Nombre</string>

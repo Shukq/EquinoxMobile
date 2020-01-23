@@ -51,8 +51,12 @@ class ProfileFragment : BaseFragment<ProfileVMFragment.ViewModel>() {
                     "gender" -> {
                         if(pair.second == "male"){
                             profile_gender.setText(getString(R.string.male_es))
-                        }else{
+                        }
+                        if(pair.second == "female"){
                             profile_gender.setText(getString(R.string.female_es))
+                        }
+                        else{
+                            profile_gender.setText(getString(R.string.other))
                         }
                     }
                     "name" -> {

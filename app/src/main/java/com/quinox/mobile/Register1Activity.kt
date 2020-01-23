@@ -48,12 +48,39 @@ class Register1Activity : BaseActivity<Register1VM.ViewModel>() {
             override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
                 when (spin_generoRegister.selectedItem){
                     getString(R.string.male) -> viewModel.inputs.gender(Gender.male)
-                    else -> viewModel.inputs.gender(Gender.female)
+                    getString(R.string.female) -> viewModel.inputs.gender(Gender.female)
+                    else -> viewModel.inputs.gender(Gender.other)
                 }
             }
         }
 
-            datePicker.setOnClickListener {
+        val staticAdapterOcu = ArrayAdapter
+            .createFromResource(
+                this, R.array.spin_Ocupation,
+                R.layout.spinner_item
+            )
+
+        staticAdapterOcu
+            .setDropDownViewResource(R.layout.spinner_dropdown_item)
+
+        spin_workRegister.adapter = staticAdapterOcu
+        spin_workRegister.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onNothingSelected(parent: AdapterView<*>?) {
+
+            }
+
+            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+                when (spin_workRegister.selectedItem){
+                    getString(R.string.student) -> viewModel.inputs.occupation("Estudiante")
+                    getString(R.string.admin) -> viewModel.inputs.occupation("Administrativo")
+                    getString(R.string.teacher) -> viewModel.inputs.occupation("Profesor")
+                    getString(R.string.otherOcu) -> viewModel.inputs.occupation("Otro")
+                }
+            }
+        }
+
+
+        datePicker.setOnClickListener {
             viewModel.inputs.datePressed()
         }
         input_nameRegister.onChange {
@@ -62,9 +89,9 @@ class Register1Activity : BaseActivity<Register1VM.ViewModel>() {
         input_emailRegister.onChange {
             viewModel.inputs.email(it)
         }
-        input_workRegister.onChange {
+        /*input_workRegister.onChange {
             viewModel.inputs.occupation(it)
-        }
+        }*/
 
         btn_nextregister.setOnClickListener {
             viewModel.inputs.nextButtonPressed()

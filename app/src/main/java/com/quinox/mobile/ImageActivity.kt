@@ -12,6 +12,8 @@ class ImageActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_image)
         window.setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN)
+        supportActionBar!!.setDisplayHomeAsUpEnabled(true)
+        supportActionBar!!.setDisplayShowHomeEnabled(true)
         val url = this.intent.getStringExtra("url")?:""
         Picasso.get().load(url).error(R.drawable.equidad_color).noPlaceholder().into(image_full_screen)
 

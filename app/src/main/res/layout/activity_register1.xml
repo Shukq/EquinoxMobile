@@ -59,25 +59,25 @@
             android:inputType="textEmailAddress" />
     </com.google.android.material.textfield.TextInputLayout>
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/lay_workRegister"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/marginStart"
-        android:layout_marginTop="@dimen/marginTop"
-        android:layout_marginEnd="@dimen/marginEnd"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/lay_emailRegister">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/input_workRegister"
-            android:layout_width="match_parent"
+        <Spinner
+            android:id="@+id/spin_workRegister"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:hint="@string/occupation_register" />
-    </com.google.android.material.textfield.TextInputLayout>
+            android:layout_gravity="center_vertical"
+            android:layout_marginStart="@dimen/marginStart"
+            android:layout_marginTop="36dp"
+            android:layout_marginEnd="@dimen/marginEnd"
+            android:layout_weight="0.35"
+            android:spinnerMode="dropdown"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/lay_emailRegister">
 
-    <ImageButton
+
+        </Spinner>
+
+        <ImageButton
         android:id="@+id/btn_nextregister"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -101,7 +101,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.488"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/lay_workRegister">
+            app:layout_constraintTop_toBottomOf="@+id/spin_workRegister">
 
             <ImageButton
                 android:id="@+id/datePicker"

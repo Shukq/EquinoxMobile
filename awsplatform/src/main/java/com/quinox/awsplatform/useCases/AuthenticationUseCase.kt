@@ -195,6 +195,7 @@ class AuthenticationUseCase : AuthenticationUseCase {
             val userGender : String = when(gender){
                 Gender.female -> "female"
                 Gender.male -> "male"
+                else -> "other"
             }
             AWSMobileClient.getInstance().signUp(username,password, mapOf(Pair("email",username),Pair("name",name),Pair("gender",userGender),Pair("birthdate",birthDate),Pair("custom:occupation", occupation)),
                 null, object: Callback<com.amazonaws.mobile.client.results.SignUpResult>{
