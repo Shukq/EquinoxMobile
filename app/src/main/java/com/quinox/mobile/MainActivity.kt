@@ -18,6 +18,7 @@ class MainActivity : BaseActivity<MainVM.ViewModel>() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        supportActionBar?.title = "Oficina de Equidad de Genero"
 
         btn_logInMain.setOnClickListener {
             viewModel.input.signInBtnPressed()

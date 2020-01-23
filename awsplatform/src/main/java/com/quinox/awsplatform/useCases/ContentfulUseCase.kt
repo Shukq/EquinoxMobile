@@ -30,6 +30,7 @@ class ContentfulUseCase:ContentfulUseCase{
         val single = Single.create<Result<List<ContentfulUnit>>> create@{ single ->
             val unidad = client.observe(CDAEntry::class.java)
                 .where("content_type", "unidad")
+                .where("order","sys.createdAt")
                 .all()
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
@@ -63,6 +64,7 @@ class ContentfulUseCase:ContentfulUseCase{
         val single = Single.create<Result<List<ContentfulSection>>> create@{ single ->
             val seccion = client.observe(CDAEntry::class.java)
                 .where("content_type", "secciones")
+                .where("order","sys.createdAt")
                 .all()
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
@@ -94,6 +96,7 @@ class ContentfulUseCase:ContentfulUseCase{
         val single = Single.create<Result<List<ContentfulClass>>> create@{ single ->
             val lesson = client.observe(CDAEntry::class.java)
                 .where("content_type","cursoV1")
+                .where("order","sys.createdAt")
                 .linksToEntryId(sectionId)
                 .all()
                 .observeOn(AndroidSchedulers.mainThread())
