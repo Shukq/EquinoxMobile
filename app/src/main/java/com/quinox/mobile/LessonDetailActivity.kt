@@ -38,7 +38,7 @@ class LessonDetailActivity : BaseActivity<LessonDetailVM.ViewModel>() {
         adapterImg = ImageAdapter(this)
         imgAlbum.adapter = adapterImg
 
-        youtubePlayer.getPlayerUiController().showFullscreenButton(true)
+        /*youtubePlayer.getPlayerUiController().showFullscreenButton(true)
         youtubePlayer.getPlayerUiController().setFullScreenButtonClickListener(View.OnClickListener {
             if(youtubePlayer.isFullScreen())
             {
@@ -56,7 +56,7 @@ class LessonDetailActivity : BaseActivity<LessonDetailVM.ViewModel>() {
                 }
             }
 
-        })
+        })*/
 
         compositeDisposable.add(viewModel.output.loadInfo().observeOn(AndroidSchedulers.mainThread()).subscribe {
             txt_titleClassDetail.text = it.title
@@ -97,7 +97,7 @@ class LessonDetailActivity : BaseActivity<LessonDetailVM.ViewModel>() {
         onBackPressed()
         return true
     }
-    fun extractYTId(ytUrl: String): String? {
+    private fun extractYTId(ytUrl: String): String? {
         var vId: String? = null
         val pattern = Pattern.compile(
             "^https?://.*(?:youtu.be/|v/|u/\\w/|embed/|watch?v=)([^#&?]*).*$",

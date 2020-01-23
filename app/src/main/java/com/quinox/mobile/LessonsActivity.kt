@@ -34,7 +34,7 @@ class LessonsActivity : BaseActivity<ClassesVM.ViewModel>() {
             startActivity(intent)
         })
         compositeDisposable.add(viewModel.outputs.classList().observeOn(AndroidSchedulers.mainThread()).subscribe{
-            adapter.setLessonList(it)
+            adapter.setLessonList(it.reversed())
         })
         recycler.adapter = adapter
 
