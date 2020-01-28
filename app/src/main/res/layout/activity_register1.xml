@@ -11,97 +11,81 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/lay_nameRegister"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/marginStart"
-        android:layout_marginTop="@dimen/marginTop"
-        android:layout_marginEnd="@dimen/marginEnd"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txt_titleRegister">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/input_nameRegister"
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/lay_nameRegister"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/name_register" />
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <TextView
-        android:id="@+id/txt_titleRegister"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/marginStart"
-        android:layout_marginTop="@dimen/marginTop"
-        android:layout_marginEnd="@dimen/marginEnd"
-        android:text="@string/RegisterTitle"
-        android:textAlignment="center"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/lay_emailRegister"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/marginStart"
-        android:layout_marginTop="@dimen/marginTop"
-        android:layout_marginEnd="@dimen/marginEnd"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/lay_nameRegister">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/input_emailRegister"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/email_register"
-            android:inputType="textEmailAddress" />
-    </com.google.android.material.textfield.TextInputLayout>
-
-        <Spinner
-            android:id="@+id/spin_workRegister"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
             android:layout_marginStart="@dimen/marginStart"
-            android:layout_marginTop="36dp"
+            android:layout_marginTop="@dimen/marginTop"
             android:layout_marginEnd="@dimen/marginEnd"
-            android:layout_weight="0.35"
-            android:spinnerMode="dropdown"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/lay_emailRegister">
+            app:layout_constraintTop_toBottomOf="@+id/txt_titleRegister">
 
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/input_nameRegister"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/name_register" />
+        </com.google.android.material.textfield.TextInputLayout>
 
-        </Spinner>
+        <TextView
+            android:id="@+id/txt_titleRegister"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/marginStart"
+            android:layout_marginTop="@dimen/marginTop"
+            android:layout_marginEnd="@dimen/marginEnd"
+            android:text="@string/RegisterTitle"
+            android:textAlignment="center"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/lay_emailRegister"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/marginStart"
+            android:layout_marginTop="@dimen/marginTop"
+            android:layout_marginEnd="@dimen/marginEnd"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/lay_nameRegister">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/input_emailRegister"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/email_register"
+                android:inputType="textEmailAddress" />
+        </com.google.android.material.textfield.TextInputLayout>
 
         <ImageButton
-        android:id="@+id/btn_nextregister"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/marginStart"
-        android:layout_marginTop="@dimen/marginTop"
-        android:layout_marginEnd="@dimen/marginEnd"
-        android:layout_marginBottom="28dp"
-        android:backgroundTint="@android:color/transparent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:srcCompat="@drawable/ic_arrow_forward_black_40dp" />
+            android:id="@+id/btn_nextregister"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/marginStart"
+            android:layout_marginTop="@dimen/marginTop"
+            android:layout_marginEnd="@dimen/marginEnd"
+            android:layout_marginBottom="28dp"
+            android:backgroundTint="@android:color/transparent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:srcCompat="@drawable/ic_arrow_forward_black_40dp" />
 
         <LinearLayout
             android:id="@+id/linearLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/marginStart"
-            android:layout_marginTop="@dimen/marginTop"
             android:layout_marginEnd="@dimen/marginEnd"
+            android:layout_marginTop="@dimen/marginTop"
             android:orientation="horizontal"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.488"
+            app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/spin_workRegister">
+            app:layout_constraintTop_toBottomOf="@+id/lay_genRegister">
 
             <ImageButton
                 android:id="@+id/datePicker"
@@ -123,20 +107,56 @@
 
         </LinearLayout>
 
-        <Spinner
-            android:id="@+id/spin_generoRegister"
-            android:layout_width="wrap_content"
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/lay_genRegister"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
             android:layout_marginStart="@dimen/marginStart"
-            android:layout_marginTop="@dimen/marginTop"
             android:layout_marginEnd="@dimen/marginEnd"
-            android:layout_weight="0.35"
-            android:spinnerMode="dropdown"
+            android:layout_marginTop="@dimen/marginTop"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
+            app:layout_constraintTop_toBottomOf="@+id/lay_ocuRegister">
+
+
+            <AutoCompleteTextView
+                android:id="@+id/input_genRegister"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@android:color/black"
+                android:enabled="false"
+                android:hint="Genero"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                tools:layout_editor_absoluteY="242dp" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/lay_ocuRegister"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/marginStart"
+            android:layout_marginEnd="@dimen/marginEnd"
+            android:layout_marginTop="@dimen/marginTop"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/lay_emailRegister">
+
+
+            <AutoCompleteTextView
+                android:id="@+id/input_ocuRegister"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@android:color/black"
+                android:enabled="false"
+                android:hint="Ocupacion"
+                app:layout_constraintStart_toStartOf="parent"
+                tools:layout_editor_absoluteY="302dp" />
+        </com.google.android.material.textfield.TextInputLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </ScrollView>

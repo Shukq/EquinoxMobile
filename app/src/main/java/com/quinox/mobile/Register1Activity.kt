@@ -9,6 +9,7 @@ import android.view.View
 import android.widget.Adapter
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
+import android.widget.AutoCompleteTextView
 import com.quinox.domain.entities.Gender
 import com.quinox.mobile.anotations.RequiresActivityViewModel
 import com.quinox.mobile.base.BaseActivity
@@ -17,67 +18,39 @@ import com.quinox.mobile.utils.DatePickerFragment
 import com.quinox.mobile.viewModels.Register1VM
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
+import kotlinx.android.synthetic.main.activity_confirm_forgot_password.*
 import kotlinx.android.synthetic.main.activity_register1.*
+
 @RequiresActivityViewModel(Register1VM.ViewModel::class)
 class Register1Activity : BaseActivity<Register1VM.ViewModel>() {
     private val disposable = CompositeDisposable()
+    lateinit var genDropDown : AutoCompleteTextView
+    lateinit var ocuDropDown : AutoCompleteTextView
+    private var listGen : List<String> = listOf()
+    private var listOcu : List<String> = listOf()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_register1)
         supportActionBar?.title = getString(R.string.registerTitle)
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
         supportActionBar!!.setDisplayShowHomeEnabled(true)
+        genDropDown = findViewById(R.id.input_genRegister)
+        ocuDropDown = findViewById(R.id.input_ocuRegister)
         btn_nextregister.visibility = View.GONE
-        val staticAdapter = ArrayAdapter
-            .createFromResource(
-                this, R.array.spin_Gender,
-                R.layout.spinner_item
-            )
 
-        // Specify the layout to use when the list of choices appears
-        staticAdapter
-            .setDropDownViewResource(R.layout.spinner_dropdown_item)
 
-        // Apply the adapter to the spinner
-        spin_generoRegister.adapter = staticAdapter
-        spin_generoRegister.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-            override fun onNothingSelected(p0: AdapterView<*>?) {
+        listGen = resources.getStringArray(R.array.spin_Gender).asList()
+        listOcu = resources.getStringArray(R.array.spin_Ocupation).asList()
 
-            }
+        var adapterGen = ArrayAdapter(this,R.layout.spinner_dropdown_item,listGen)
+        var adapterOcu = ArrayAdapter(this,R.layout.spinner_dropdown_item,listOcu)
 
-            override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
-                when (spin_generoRegister.selectedItem){
-                    getString(R.string.male) -> viewModel.inputs.gender(Gender.male)
-                    getString(R.string.female) -> viewModel.inputs.gender(Gender.female)
-                    else -> viewModel.inputs.gender(Gender.other)
-                }
-            }
-        }
+        genDropDown.setAdapter(adapterGen)
+        ocuDropDown.setAdapter(adapterOcu)
 
-        val staticAdapterOcu = ArrayAdapter
-            .createFromResource(
-                this, R.array.spin_Ocupation,
-                R.layout.spinner_item
-            )
 
-        staticAdapterOcu
-            .setDropDownViewResource(R.layout.spinner_dropdown_item)
 
-        spin_workRegister.adapter = staticAdapterOcu
-        spin_workRegister.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-            override fun onNothingSelected(parent: AdapterView<*>?) {
 
-            }
-
-            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-                when (spin_workRegister.selectedItem){
-                    getString(R.string.student) -> viewModel.inputs.occupation("Estudiante")
-                    getString(R.string.admin) -> viewModel.inputs.occupation("Administrativo")
-                    getString(R.string.teacher) -> viewModel.inputs.occupation("Profesor")
-                    getString(R.string.otherOcu) -> viewModel.inputs.occupation("Otro")
-                }
-            }
-        }
 
 
         datePicker.setOnClickListener {
@@ -89,9 +62,23 @@ class Register1Activity : BaseActivity<Register1VM.ViewModel>() {
         input_emailRegister.onChange {
             viewModel.inputs.email(it)
         }
-        /*input_workRegister.onChange {
-            viewModel.inputs.occupation(it)
-        }*/
+
+        input_genRegister.onChange {
+            when (it) {
+                getString(R.string.male) -> viewModel.inputs.gender(Gender.male)
+                getString(R.string.female) -> viewModel.inputs.gender(Gender.female)
+                getString(R.string.other) -> viewModel.inputs.gender(Gender.other)
+            }
+        }
+
+        input_ocuRegister.onChange {
+            when (it) {
+                getString(R.string.student) -> viewModel.inputs.occupation("Estudiante")
+                getString(R.string.admin) -> viewModel.inputs.occupation("Administrativo")
+                getString(R.string.teacher) -> viewModel.inputs.occupation("Docente")
+                getString(R.string.otherOcu) -> viewModel.inputs.occupation("Otro")
+            }
+        }
 
         btn_nextregister.setOnClickListener {
             viewModel.inputs.nextButtonPressed()
@@ -152,4 +139,6 @@ class Register1Activity : BaseActivity<Register1VM.ViewModel>() {
         disposable.dispose()
         super.onDestroy()
     }
+
+
 }

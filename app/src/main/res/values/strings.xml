@@ -11,12 +11,14 @@
     <string name="nav_header_desc">Navigation header</string>
     <string name="action_settings">Settings</string>
 
+
     <string name="male">Hombre</string>
     <string name="female">Mujer</string>
     <string name="other">Otro</string>
 
+
     <string name="student">Estudiante</string>
-    <string name="teacher">Profesor</string>
+    <string name="teacher">Docente</string>
     <string name="admin">Administrativo</string>
     <string name="otherOcu">Otro</string>
 

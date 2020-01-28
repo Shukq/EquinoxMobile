@@ -33,7 +33,8 @@
             android:label="@string/title_activity_home"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".Register2Activity" />
-        <activity android:name=".Register1Activity" />
+        <activity android:name=".Register1Activity"
+            android:theme="@style/AppTheme.ActionBar"/>
         <activity android:name=".LogInActivity" />
         <activity android:name=".MainActivity" />
     </application>
